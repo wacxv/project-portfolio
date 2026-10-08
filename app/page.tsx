@@ -1,69 +1,212 @@
+"use client";
+
 import Image from "next/image";
+import Link from "next/link";
+import { motion, type Variants } from "framer-motion";
+import { FaArrowRight, FaEnvelope, FaGithub, FaLinkedin } from "react-icons/fa";
+
+const fadeInUp: Variants = {
+  hidden: { opacity: 0, y: 40 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: "easeOut" },
+  },
+};
+
+const staggerContainer: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.15 },
+  },
+};
+
+const projectCard: Variants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, ease: "easeOut" },
+  },
+};
+
+function AnimatedTechContinuous({
+  text,
+  baseDelay = 0,
+}: {
+  text: string;
+  baseDelay?: number;
+}) {
+  return (
+    <span className="tech-highlight-continuous">
+      {text.split("").map((letter, index) => (
+        <motion.span
+          key={`${text}-${index}`}
+          animate={{
+            color: ["#DC2626", "#EF4444", "#F87171", "#EF4444", "#DC2626"],
+            textShadow: [
+              "0 0 0px rgba(220, 38, 38, 0)",
+              "0 0 15px rgba(220, 38, 38, 0.6)",
+              "0 0 25px rgba(220, 38, 38, 0.9)",
+              "0 0 15px rgba(220, 38, 38, 0.6)",
+              "0 0 0px rgba(220, 38, 38, 0)",
+            ],
+            scale: [1, 1.05, 1.1, 1.05, 1],
+          }}
+          transition={{
+            duration: 3,
+            repeat: Infinity,
+            delay: baseDelay + index * 0.08,
+            ease: "easeInOut",
+          }}
+          style={{ display: "inline-block" }}
+        >
+          {letter === " " ? "\u00A0" : letter}
+        </motion.span>
+      ))}
+    </span>
+  );
+}
+
+const projects = [
+  {
+    image: "/project-taskeval.svg",
+    alt: "TaskEval Project",
+    title: "Task Evaluator",
+    description:
+      "A .NET 9 + PostgreSQL task API evaluator for assessing CRUD, auth, and EF Core usage.",
+  },
+  {
+    image: "/project-havenbloom.svg",
+    alt: "HavenBloom Project",
+    title: "HavenBloom",
+    description:
+      "A Telehealth platform for maternal health with real-time video consultations and IoT device monitoring.",
+  },
+  {
+    image: "/project-aws-calculator.svg",
+    alt: "AWSCalcu Project",
+    title: "AWS Calculator",
+    description:
+      "Angular-based AWS pricing calculator with auth, cost modeling, and collection management, built for AWS CloudFront deployment.",
+  },
+];
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
+    <div id="profile-outer">
+      <div id="profile-inner">
+        <motion.div
+          id="hero-container"
+          initial="hidden"
+          animate="visible"
+          variants={staggerContainer}
+        >
+          <motion.h1 id="hero-greeting" variants={fadeInUp}>
+            Hi, I&apos;m <span className="name-highlight">Joaquin Vizconde</span>
+          </motion.h1>
+          <motion.h2 id="hero-title" variants={fadeInUp}>
+            a Full-Stack Developer
+          </motion.h2>
+          <motion.p id="hero-description" variants={fadeInUp}>
+            I&apos;m a full-stack developer who loves turning ideas into polished web
+            applications. I focus on writing clean, maintainable code and creating
+            intuitive user experiences using{" "}
+            <AnimatedTechContinuous text="React" />,{" "}
+            <AnimatedTechContinuous text="Node.js" baseDelay={0.5} />,{" "}
+            <AnimatedTechContinuous text="MongoDB" baseDelay={1} />, and{" "}
+            <AnimatedTechContinuous text="Express.js" baseDelay={1.5} />.
+          </motion.p>
+          <motion.div variants={fadeInUp}>
+            <Link href="/contact" id="cta-button">
+              Get in Touch
+            </Link>
+          </motion.div>
+          <motion.div className="hero-socials" variants={fadeInUp}>
+            <a
+              href="https://github.com/wacxv"
+              className="social-link"
+              aria-label="GitHub"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <FaGithub />
+              <span>GitHub</span>
+            </a>
+            <a
+              href="https://www.linkedin.com/in/joaquin-carlos-vizconde"
+              className="social-link"
+              aria-label="LinkedIn"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <FaLinkedin />
+              <span>LinkedIn</span>
+            </a>
+            <a href="mailto:your.email@example.com" className="social-link" aria-label="Email">
+              <FaEnvelope />
+              <span>Email</span>
+            </a>
+          </motion.div>
+        </motion.div>
+
+        <motion.div
+          id="section-divider"
+          initial={{ scaleX: 0 }}
+          whileInView={{ scaleX: 1 }}
+          viewport={{ once: true, amount: 0.5 }}
+          transition={{ duration: 0.8, ease: "easeInOut" }}
+          style={{ transformOrigin: "left" }}
         />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+
+        <div id="projects-section-container">
+          <motion.h2
+            id="section-title"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.6 }}
           >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+            Recent Projects
+          </motion.h2>
+          <motion.div
+            id="projects-grid"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+            variants={staggerContainer}
           >
-            Documentation
-          </a>
+            {projects.map((project) => (
+              <motion.div
+                className="project-card"
+                tabIndex={0}
+                variants={projectCard}
+                whileHover={{ y: -10 }}
+                transition={{ duration: 0.3 }}
+                key={project.title}
+              >
+                <Image src={project.image} alt={project.alt} fill sizes="(max-width: 768px) 100vw, 33vw" />
+                <div className="project-info" aria-hidden="true">
+                  <h3>{project.title}</h3>
+                  <p>{project.description}</p>
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.4, duration: 0.6 }}
+          >
+            <Link href="/projects" id="view-all-link">
+              View All Projects
+              <FaArrowRight />
+            </Link>
+          </motion.div>
         </div>
-      </main>
+      </div>
     </div>
   );
 }
