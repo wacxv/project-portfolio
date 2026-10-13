@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { motion, type Variants } from "framer-motion";
 import { FaArrowRight, FaEnvelope, FaGithub, FaLinkedin } from "react-icons/fa";
@@ -19,15 +18,6 @@ const staggerContainer: Variants = {
   visible: {
     opacity: 1,
     transition: { staggerChildren: 0.15 },
-  },
-};
-
-const projectCard: Variants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.5, ease: "easeOut" },
   },
 };
 
@@ -68,30 +58,6 @@ function AnimatedTechContinuous({
     </span>
   );
 }
-
-const projects = [
-  {
-    image: "/project-taskeval.svg",
-    alt: "TaskEval Project",
-    title: "Task Evaluator",
-    description:
-      "A .NET 9 + PostgreSQL task API evaluator for assessing CRUD, auth, and EF Core usage.",
-  },
-  {
-    image: "/project-havenbloom.svg",
-    alt: "HavenBloom Project",
-    title: "HavenBloom",
-    description:
-      "A Telehealth platform for maternal health with real-time video consultations and IoT device monitoring.",
-  },
-  {
-    image: "/project-aws-calculator.svg",
-    alt: "AWSCalcu Project",
-    title: "AWS Calculator",
-    description:
-      "Angular-based AWS pricing calculator with auth, cost modeling, and collection management, built for AWS CloudFront deployment.",
-  },
-];
 
 export default function Home() {
   return (
@@ -177,22 +143,7 @@ export default function Home() {
             viewport={{ once: true, amount: 0.2 }}
             variants={staggerContainer}
           >
-            {projects.map((project) => (
-              <motion.div
-                className="project-card"
-                tabIndex={0}
-                variants={projectCard}
-                whileHover={{ y: -10 }}
-                transition={{ duration: 0.3 }}
-                key={project.title}
-              >
-                <Image src={project.image} alt={project.alt} fill sizes="(max-width: 768px) 100vw, 33vw" />
-                <div className="project-info" aria-hidden="true">
-                  <h3>{project.title}</h3>
-                  <p>{project.description}</p>
-                </div>
-              </motion.div>
-            ))}
+
           </motion.div>
           <motion.div
             initial={{ opacity: 0 }}
