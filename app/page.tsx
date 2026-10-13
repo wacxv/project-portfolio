@@ -76,7 +76,7 @@ export default function Home() {
             a Full-Stack Developer
           </motion.h2>
           <motion.p id="hero-description" variants={fadeInUp}>
-            I&apos;m a full-stack developer who loves turning ideas into polished web
+            I&apos;m a a developer who loves turning ideas into polished web
             applications. I focus on writing clean, maintainable code and creating
             intuitive user experiences using{" "}
             <AnimatedTechContinuous text="React" />,{" "}
