@@ -76,13 +76,10 @@ export default function Home() {
             a Full-Stack Developer
           </motion.h2>
           <motion.p id="hero-description" variants={fadeInUp}>
-            I&apos;m a a developer who loves turning ideas into polished web
-            applications. I focus on writing clean, maintainable code and creating
-            intuitive user experiences using{" "}
-            <AnimatedTechContinuous text="React" />,{" "}
-            <AnimatedTechContinuous text="Node.js" baseDelay={0.5} />,{" "}
-            <AnimatedTechContinuous text="MongoDB" baseDelay={1} />, and{" "}
-            <AnimatedTechContinuous text="Express.js" baseDelay={1.5} />.
+            I&apos;m too{" "}
+            <AnimatedTechContinuous text="caffeinated" /> to sit still, so I
+            build things instead. Clean code, sharp interfaces, and{" "}
+            <AnimatedTechContinuous text="zero chill" baseDelay={0.5} />.
           </motion.p>
           <motion.div variants={fadeInUp}>
             <Link href="/contact" id="cta-button">
