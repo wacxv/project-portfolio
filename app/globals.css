@@ -281,8 +281,8 @@ body {
 }
 
 @keyframes projects-carousel-drift {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
+  from { transform: translateX(-50%); }
+  to { transform: translateX(0); }
 }
 
 .projects-carousel-viewport:focus-visible {
