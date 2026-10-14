@@ -8,5 +8,5 @@ export const GALLERY_PHOTOS: string[] = [
   "/gallery/cafe-pasig-wabisabi.jpg",
   "/gallery/street-pasig-3.JPG",
   "/gallery/cafe-pasig-cache.jpg",
-  "/gallery/cafe-makati-frmgmt.JPG",
+  "/gallery/cafe-makati-frmgmt.jpg",
 ];

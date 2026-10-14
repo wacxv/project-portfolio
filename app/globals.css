@@ -28,6 +28,14 @@
   --space-gallery-stagger: 0.75rem;
   --radius-gallery: 1rem;
   --duration-gallery-loop: 90s;
+  --space-skill-card: 0.75rem;
+  --gap-skills-grid: 0.75rem;
+  --gap-skill-list: 0.375rem;
+  --space-skill-tag-y: 0.25rem;
+  --space-skill-tag-x: 0.4rem;
+  --font-skill-heading: 0.95rem;
+  --font-skill-tag: 0.8rem;
+  --size-skill-icon: 0.9rem;
 }
 
 html,
@@ -1289,16 +1297,23 @@ section {
 }
 
 .page-horizontal #skills {
-  width: clamp(640px, 68vw, 1050px);
+  width: clamp(720px, 90vw, 1280px);
+  overflow-y: auto;
+}
+
+.page-horizontal #skills .content-section {
+  gap: var(--gap-skills-grid);
+  margin-block: auto;
+}
+
+.page-horizontal #skills .section-header {
+  margin-bottom: var(--gap-skills-grid);
 }
 
 .page-horizontal .skills-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1.25rem;
-  max-height: calc(100vh - 220px);
-  overflow-y: auto;
-  padding-right: 0.5rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--gap-skills-grid);
 }
 
 .page-horizontal #experience {
@@ -1507,12 +1522,12 @@ section {
 
 .skills-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1.5rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--gap-skills-grid);
 }
 
 .skill-card {
-  padding: 1.5rem;
+  padding: var(--space-skill-card);
   background: rgba(26, 31, 46, 0.75);
   border: 1px solid #2d3348;
   border-radius: 12px;
@@ -1525,14 +1540,15 @@ section {
 }
 
 .skill-card h3 {
-  margin: 0 0 0.75rem;
+  margin: 0 0 var(--gap-skill-list);
   color: #ffffff;
+  font-size: var(--font-skill-heading);
 }
 
 .skill-list {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.75rem;
+  gap: var(--gap-skill-list);
   margin: 0;
   padding: 0;
   list-style: none;
@@ -1542,16 +1558,17 @@ section {
   display: inline-flex;
   align-items: center;
   gap: 0.45rem;
-  padding: 0.45rem 0.65rem;
+  padding: var(--space-skill-tag-y) var(--space-skill-tag-x);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 999px;
   color: #c4c9d4;
-  font-size: 0.9rem;
+  font-size: var(--font-skill-tag);
 }
 
 .skill-list svg {
   color: #f87171;
-  font-size: 1.1rem;
+  font-size: var(--size-skill-icon);
+  flex-shrink: 0;
 }
 
 .experience-list {
@@ -1910,8 +1927,17 @@ section {
     width: min(100%, 18rem);
   }
 
-  .skills-grid {
+  .skills-grid,
+  .page-horizontal .skills-grid {
     grid-template-columns: 1fr;
+  }
+
+  .page-horizontal #skills {
+    width: calc(100vw - 2rem);
+  }
+
+  .page-horizontal #skills .content-section {
+    margin-block: 0;
   }
 
   #section-divider {
