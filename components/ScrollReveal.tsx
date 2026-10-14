@@ -2,7 +2,6 @@
 
 import {
   motion,
-  useReducedMotion,
   useScroll,
   useTransform,
 } from "framer-motion";
@@ -33,7 +32,6 @@ function RevealWord({
 export default function ScrollReveal({ text }: { text: string }) {
   const paragraphRef = useRef<HTMLParagraphElement>(null);
   const [isMounted, setIsMounted] = useState(false);
-  const prefersReducedMotion = useReducedMotion();
   const { scrollXProgress } = useScroll({
     target: paragraphRef,
     axis: "x",
@@ -52,7 +50,7 @@ export default function ScrollReveal({ text }: { text: string }) {
           key={`${word}-${index}`}
           word={word}
           progress={scrollXProgress}
-          disabled={!isMounted || prefersReducedMotion !== false}
+          disabled={!isMounted}
         />
       ))}
     </motion.p>

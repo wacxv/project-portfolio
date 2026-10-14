@@ -280,12 +280,6 @@ body {
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .button-spinner {
-    animation: none;
-  }
-}
-
 .scroll-progress {
   position: fixed;
   z-index: 1100;
@@ -381,12 +375,6 @@ body {
 .projects-carousel .project-tech-tags li {
   font-size: var(--font-project-tag);
   padding: var(--space-project-tag-y) var(--space-project-tag-x);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .projects-carousel-container { animation: none; }
-  .projects-carousel-viewport { overflow-x: auto; }
-  .projects-carousel-set[aria-hidden="true"] { display: none; }
 }
 
 .projects-carousel-slide {
@@ -767,29 +755,6 @@ html.page-horizontal.lenis body {
   }
   to {
     transform: translateX(0);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .photo-strip-track {
-    animation: none;
-    transform: translateX(0);
-  }
-
-  .photo-strip-toggle { display: none; }
-  .photo-strip-card { transition: none; }
-
-  .photo-strip-viewport {
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-  }
-
-  .photo-strip-set {
-    scroll-snap-align: start;
-  }
-
-  .photo-strip-set[aria-hidden="true"] {
-    display: none;
   }
 }
 

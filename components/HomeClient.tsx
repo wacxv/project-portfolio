@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { motion, useReducedMotion, useScroll, useSpring, useTransform } from "framer-motion";
+import { motion, useScroll, useSpring, useTransform } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import type { ComponentType } from "react";
@@ -112,7 +112,6 @@ function AnimatedTechContinuous({
 }
 
 function ScrollProgress() {
-  const prefersReducedMotion = useReducedMotion();
   const [isMounted, setIsMounted] = useState(false);
   const { scrollXProgress } = useScroll();
   const progress = useSpring(scrollXProgress, {
@@ -132,7 +131,7 @@ function ScrollProgress() {
       aria-hidden="true"
       initial={false}
       style={{
-        scaleX: isMounted && !prefersReducedMotion ? progress : 0,
+        scaleX: isMounted ? progress : 0,
       }}
     />
   );
@@ -201,7 +200,6 @@ export default function HomeClient({
   const heroRef = useRef<HTMLElement>(null);
   const [isMounted, setIsMounted] = useState(false);
   const [currentYear, setCurrentYear] = useState<number | null>(null);
-  const prefersReducedMotion = useReducedMotion();
   const { scrollXProgress: heroProgress } = useScroll({
     target: heroRef,
     axis: "x",
@@ -253,7 +251,7 @@ export default function HomeClient({
           <motion.div
             id="hero-scroll-wrapper"
             style={
-              !isMounted || prefersReducedMotion
+              !isMounted
                 ? undefined
                 : { opacity: heroOpacity, x: heroX, scale: heroScale }
             }
