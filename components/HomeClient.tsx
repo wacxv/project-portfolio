@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { FaArrowRight, FaEnvelope, FaGithub, FaLinkedin } from "react-icons/fa";
 
 import { fadeInUp, staggerContainer } from "@/components/animation-variants";
+import PhotoStrip from "@/components/PhotoStrip";
 import ProjectsCarousel from "@/components/ProjectsCarousel";
 import type { Project } from "@/db/schema";
 
@@ -139,6 +140,8 @@ export default function HomeClient({ projects }: { projects: Project[] }) {
             </motion.div>
           </div>
         </section>
+
+        <PhotoStrip />
 
         <section id="skills">
           <motion.div
