@@ -21,7 +21,7 @@ const projectFields = {
     ),
   summary: z.string().trim().optional().nullable(),
   description: z.string().optional().nullable(),
-  techTags: z.array(z.string().trim().min(1)).default([]),
+  techTags: z.array(z.string().trim().min(1)).default([]).transform((tags) => [...new Set(tags)]),
   coverImageUrl: optionalUrl,
   coverImagePath: z.string().trim().min(1).optional().nullable(),
   gallery: z.array(galleryImageSchema).default([]),

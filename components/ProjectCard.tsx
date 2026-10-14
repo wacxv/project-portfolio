@@ -53,7 +53,7 @@ export default function ProjectCard({ project }: { project: Project }) {
         {project.summary ? <p>{project.summary}</p> : null}
         {project.techTags.length > 0 ? (
           <ul className="project-tech-tags" aria-label="Technologies used">
-            {project.techTags.map((tag) => (
+            {[...new Set(project.techTags)].map((tag) => (
               <li key={tag}>{tag}</li>
             ))}
           </ul>

@@ -9,6 +9,9 @@
   --color-muted: #9ca3af;
   --radius-control: 6px;
   --duration-standard: 0.3s;
+  --admin-space: 1rem;
+  --admin-space-lg: 2rem;
+  --color-admin-border: #3a4154;
 }
 
 html,
@@ -695,8 +698,69 @@ html.page-horizontal.lenis body {
 
 .admin-shell {
   min-height: 100vh;
-  background: #0a0e14;
-  color: #ededed;
+  padding-top: 5rem;
+  background: var(--color-background);
+  color: var(--color-text);
+}
+
+.admin-project-panel {
+  margin-top: var(--admin-space);
+  border: 1px solid var(--color-admin-border);
+  border-radius: var(--radius-control);
+  background: var(--color-surface);
+}
+
+.admin-project-panel summary {
+  padding: var(--admin-space);
+  cursor: pointer;
+  overflow-wrap: anywhere;
+}
+
+.admin-project-status {
+  color: var(--color-muted);
+  font-size: 0.875rem;
+}
+
+.admin-editor {
+  padding: var(--admin-space);
+}
+
+.admin-project-form,
+.admin-delete-form {
+  display: grid;
+  gap: var(--admin-space);
+}
+
+.admin-delete-form {
+  margin-top: var(--admin-space-lg);
+  padding-top: var(--admin-space);
+  border-top: 1px solid var(--color-admin-border);
+}
+
+.admin-project-form select {
+  padding: var(--admin-space);
+  background: var(--color-background);
+  color: var(--color-text);
+  border: 1px solid var(--color-admin-border);
+  border-radius: var(--radius-control);
+  font: inherit;
+}
+
+.admin-checkbox {
+  display: flex;
+  align-items: center;
+  gap: var(--admin-space);
+}
+
+.admin-editor :focus-visible,
+.admin-project-panel summary:focus-visible {
+  outline: 2px solid var(--color-accent-light);
+  outline-offset: 3px;
+}
+
+@media (max-width: 600px) {
+  .admin-header { flex-wrap: wrap; gap: var(--admin-space); }
+  .admin-dashboard { padding: var(--admin-space-lg) var(--admin-space); }
 }
 
 .admin-header {

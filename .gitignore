@@ -25,6 +25,7 @@
 *.pem
 /photos-original/
 resize-photos.mjs
+admin-setup.md
 
 # debug
 npm-debug.log*
