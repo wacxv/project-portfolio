@@ -58,8 +58,8 @@ export const getFeaturedProjects = unstable_cache(
 
 export const getAllProjects = unstable_cache(
   queryAllProjects,
-  ["projects-all"],
-  { tags: [PROJECTS_TAG] },
+  ["projects-all-v2"],
+  { tags: [PROJECTS_TAG], revalidate: 60 },
 );
 
 export const getProjectBySlug = (slug: string): Promise<Project | null> =>
