@@ -6,6 +6,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useLenis } from "lenis/react";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
+import { FaBars, FaTimes } from "react-icons/fa";
 
 import type { GitHubProfile } from "@/lib/github";
 
@@ -177,9 +178,7 @@ export default function Header({ profile }: { profile: GitHubProfile }) {
             aria-controls="mobile-menu"
             onClick={() => setIsMenuOpen((open) => !open)}
           >
-            <span />
-            <span />
-            <span />
+            {isMenuOpen ? <FaTimes aria-hidden="true" /> : <FaBars aria-hidden="true" />}
           </button>
         </div>
         <AnimatePresence>

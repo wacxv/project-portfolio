@@ -7,6 +7,7 @@ import Image from "next/image";
 import type { ComponentType } from "react";
 import {
   FaArrowRight,
+  FaArrowLeft,
   FaAws,
   FaEnvelope,
   FaGithub,
@@ -17,19 +18,30 @@ import {
 import {
   SiAngular,
   SiBootstrap,
+  SiBluetooth,
+  SiChartdotjs,
   SiCss,
+  SiDotnet,
   SiExpress,
+  SiFigma,
   SiHtml5,
+  SiJsonwebtokens,
+  SiMariadb,
   SiMongodb,
+  SiMqtt,
   SiMysql,
   SiNodedotjs,
   SiOpencv,
   SiPostgresql,
   SiPostman,
   SiReact,
+  SiRust,
+  SiSocketdotio,
+  SiTailwindcss,
   SiTauri,
   SiTypescript,
   SiVercel,
+  SiWebrtc,
 } from "react-icons/si";
 import { MdApi, MdSecurity, MdWeb } from "react-icons/md";
 
@@ -120,15 +132,19 @@ const SKILL_ICONS: Record<string, ComponentType<{ "aria-hidden"?: boolean }>> = 
   api: MdApi,
   aws: FaAws,
   bootstrap: SiBootstrap,
+  bluetooth: SiBluetooth,
+  chartjs: SiChartdotjs,
   css: SiCss,
-  dotnet: MdWeb,
+  dotnet: SiDotnet,
   express: SiExpress,
+  figma: SiFigma,
   git: FaGitAlt,
   github: FaGithub,
   html: SiHtml5,
-  jwt: MdSecurity,
-  mariadb: SiMysql,
+  jwt: SiJsonwebtokens,
+  mariadb: SiMariadb,
   mongodb: SiMongodb,
+  mqtt: SiMqtt,
   mysql: SiMysql,
   node: SiNodedotjs,
   opencv: SiOpencv,
@@ -136,12 +152,15 @@ const SKILL_ICONS: Record<string, ComponentType<{ "aria-hidden"?: boolean }>> = 
   postman: SiPostman,
   python: FaPython,
   react: SiReact,
-  rust: MdWeb,
+  rust: SiRust,
   security: MdSecurity,
+  mail: FaEnvelope,
+  socketio: SiSocketdotio,
+  tailwind: SiTailwindcss,
   tauri: SiTauri,
   typescript: SiTypescript,
   vercel: SiVercel,
-  webrtc: MdWeb,
+  webrtc: SiWebrtc,
 };
 
 function SkillIcon({ item }: { item: SkillItem }) {
@@ -454,7 +473,7 @@ export default function HomeClient({
               window.history.pushState(null, "", "/#home");
             }}
           >
-            Back to start <span aria-hidden="true">&larr;</span>
+            Back to start <FaArrowLeft aria-hidden="true" />
           </a>
         </footer>
       </div>

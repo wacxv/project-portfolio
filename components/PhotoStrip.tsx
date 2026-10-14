@@ -29,7 +29,7 @@ function PhotoSet({ duplicate = false }: { duplicate?: boolean }) {
             alt=""
             width={1000}
             height={1333}
-            loading="lazy"
+            loading={!duplicate && index === 0 ? "eager" : "lazy"}
             sizes="(max-width: 768px) 72vw, 340px"
           />
         </div>
@@ -84,8 +84,7 @@ export default function PhotoStrip() {
         id="gallery-photos"
         tabIndex={0}
         role="region"
-        aria-label="Photos from my walks. Motion pauses on keyboard focus."
-        data-lenis-prevent
+        aria-label="Photos from my walks."
       >
         <div className="photo-strip-track">
           <PhotoSet />
