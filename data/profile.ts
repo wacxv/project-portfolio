@@ -90,51 +90,21 @@ export const SKILL_CATEGORIES: SkillCategory[] = [
 
 export const TIMELINE_ENTRIES: TimelineEntry[] = [
   {
-    title: "Bachelor of Science in Information Technology, Cum Laude",
-    place: "Mapúa University",
-    dates: "2022 – February 2026",
-    description: "Graduated with a focus on building practical software systems across web, desktop, and connected-device projects.",
-  },
-  {
     title: "Cloud Developer Intern",
     place: "iCXeed Inc., Philippines",
     dates: "January 2025 – May 2025",
     description: "Built an Angular and TypeScript AWS pricing calculator, contributed MariaDB pricing logic and CRUD operations, and deployed the application with CloudFront, S3, and Cognito.",
   },
   {
+    title: "Bachelor of Science in Information Technology, Cum Laude",
+    place: "Mapúa University",
+    dates: "2022 – February 2026",
+    description: "Graduated with a focus on building practical software systems across web, desktop, and connected-device projects.",
+  },
+  {
     title: "HavenBloom Telehealth Platform",
     place: "Undergraduate Thesis",
     dates: "2025",
     description: "Built most of the features in a three-person team, including real-time chat, WebRTC consultations, live BLE and MQTT health data, dashboards, and appointment workflows.",
-  },
-  {
-    title: "Microsoft Artificial Intelligence Course: Azure AI Fundamentals",
-    place: "TESDA",
-    dates: "2026",
-    description: "Completed foundational coursework covering artificial intelligence concepts and Azure AI fundamentals.",
-  },
-  {
-    title: "AWS Cloud Technical Essentials",
-    place: "Amazon Web Services, Coursera",
-    dates: "2025",
-    description: "Completed coursework covering core AWS cloud concepts and services.",
-  },
-  {
-    title: "IoT (Internet of Things) Wireless & Cloud Computing Emerging Technologies",
-    place: "Yonsei University, Coursera",
-    dates: "2024",
-    description: "Completed coursework covering wireless IoT systems and cloud computing technologies.",
-  },
-  {
-    title: "Software Architecture",
-    place: "University of Alberta, Coursera",
-    dates: "2024",
-    description: "Completed coursework covering software architecture principles and design practices.",
-  },
-  {
-    title: "Data Structures",
-    place: "University of California San Diego, Coursera",
-    dates: "2023",
-    description: "Completed coursework covering core data structures and algorithmic problem solving.",
-  },
+  }
 ];

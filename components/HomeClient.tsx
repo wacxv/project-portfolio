@@ -38,6 +38,7 @@ import PhotoStrip from "@/components/PhotoStrip";
 import ProjectsCarousel from "@/components/ProjectsCarousel";
 import ScrollReveal from "@/components/ScrollReveal";
 import ContactForm from "@/components/ContactForm";
+import SectionDots from "@/components/SectionDots";
 import {
   ABOUT_TEXT,
   CURRENTLY_LEARNING,
@@ -176,6 +177,31 @@ export default function HomeClient({
     return () => cancelAnimationFrame(frame);
   }, []);
 
+  const [activeSection, setActiveSection] = useState("home");
+
+  useEffect(() => {
+    const sectionIds = ["home", "projects", "about", "skills", "experience", "contact"];
+    const updateActive = () => {
+      const scrollX = window.scrollX;
+      const mid = scrollX + window.innerWidth / 2;
+      let closest = sectionIds[0];
+      let closestDist = Infinity;
+      for (const id of sectionIds) {
+        const el = document.getElementById(id);
+        if (!el) continue;
+        const sectionMid = el.offsetLeft + el.offsetWidth / 2;
+        const dist = Math.abs(sectionMid - mid);
+        if (dist < closestDist) {
+          closestDist = dist;
+          closest = id;
+        }
+      }
+      setActiveSection(closest);
+    };
+    window.addEventListener("scroll", updateActive, { passive: true });
+    return () => window.removeEventListener("scroll", updateActive);
+  }, []);
+
   return (
     <>
       <ScrollProgress />
@@ -199,6 +225,7 @@ export default function HomeClient({
             <motion.h1 id="hero-greeting" variants={fadeInUp}>
               Hi, I&apos;m <span className="name-highlight">Joaquin Vizconde</span>
             </motion.h1>
+            <motion.div className="hero-decorator" variants={fadeInUp} aria-hidden="true" />
             <motion.h2 id="hero-title" variants={fadeInUp}>
               a Full-Stack Developer
             </motion.h2>
@@ -258,15 +285,18 @@ export default function HomeClient({
 
         <section id="projects">
           <div id="projects-section-container">
-            <motion.h2
-              className="section-title"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.3 }}
-              transition={{ duration: 0.6 }}
-            >
-              Recent Projects
-            </motion.h2>
+            <div className="section-header">
+              <span className="section-number" aria-hidden="true">01</span>
+              <motion.h2
+                className="section-title"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 0.6 }}
+              >
+                Recent Projects
+              </motion.h2>
+            </div>
             <ProjectsCarousel projects={projects} />
             <motion.div
               initial={{ opacity: 0 }}
@@ -302,7 +332,10 @@ export default function HomeClient({
               />
             </motion.div>
             <div className="about-content">
-              <motion.h2 className="section-title" variants={fadeInUp}>About</motion.h2>
+              <div className="section-header">
+                <span className="section-number" aria-hidden="true">02</span>
+                <motion.h2 className="section-title" variants={fadeInUp}>About</motion.h2>
+              </div>
               <ScrollReveal text={ABOUT_TEXT.join(" ")} />
               <motion.p className="currently-learning" variants={fadeInUp}>
                 {CURRENTLY_LEARNING}
@@ -319,7 +352,10 @@ export default function HomeClient({
             viewport={{ once: true, amount: 0.2 }}
             variants={staggerContainer}
           >
-            <motion.h2 className="section-title" variants={fadeInUp}>Skills</motion.h2>
+            <div className="section-header">
+              <span className="section-number" aria-hidden="true">03</span>
+              <motion.h2 className="section-title" variants={fadeInUp}>Skills</motion.h2>
+            </div>
             <div className="skills-grid">
               {SKILL_CATEGORIES.map((category) => (
                 <motion.div className="skill-card" variants={fadeInUp} key={category.key}>
@@ -346,7 +382,10 @@ export default function HomeClient({
             viewport={{ once: true, amount: 0.2 }}
             variants={staggerContainer}
           >
-            <motion.h2 className="section-title" variants={fadeInUp}>Experience</motion.h2>
+            <div className="section-header">
+              <span className="section-number" aria-hidden="true">04</span>
+              <motion.h2 className="section-title" variants={fadeInUp}>Experience</motion.h2>
+            </div>
             <motion.ol className="experience-list" variants={staggerContainer}>
               {TIMELINE_ENTRIES.map((entry) => (
                 <motion.li className="experience-entry" variants={fadeInUp} key={`${entry.title}-${entry.dates}`}>
@@ -371,7 +410,10 @@ export default function HomeClient({
             viewport={{ once: true, amount: 0.2 }}
             variants={staggerContainer}
           >
-            <motion.h2 className="section-title" variants={fadeInUp}>Get in Touch</motion.h2>
+            <div className="section-header">
+              <span className="section-number" aria-hidden="true">05</span>
+              <motion.h2 className="section-title" variants={fadeInUp}>Get in Touch</motion.h2>
+            </div>
             <motion.p variants={fadeInUp}>Have a project in mind? I&apos;d love to hear from you.</motion.p>
             <div className="contact-content">
               <motion.div className="contact-form-wrapper" variants={fadeInUp}>
@@ -420,6 +462,7 @@ export default function HomeClient({
         </footer>
       </div>
       </div>
+      <SectionDots activeSection={activeSection} />
     </>
   );
 }

@@ -35,30 +35,32 @@ export default function Header({ profile }: { profile: GitHubProfile }) {
       .map((item) => document.getElementById(item.href.slice(2)))
       .filter((section): section is HTMLElement => section !== null);
 
+    // Use scroll-based detection for horizontal pages: IntersectionObserver
+    // with vertical rootMargin does not work for horizontally-laid-out sections.
     const updateActiveSection = () => {
-      setActiveSection(window.location.hash.slice(1) || "home");
+      const scrollX = window.scrollX;
+      const viewportMid = scrollX + window.innerWidth / 2;
+      let closestSection = sections[0];
+      let closestDistance = Infinity;
+      for (const section of sections) {
+        const sectionMid = section.offsetLeft + section.offsetWidth / 2;
+        const distance = Math.abs(sectionMid - viewportMid);
+        if (distance < closestDistance) {
+          closestDistance = distance;
+          closestSection = section;
+        }
+      }
+      if (closestSection) {
+        setActiveSection(closestSection.id);
+      }
     };
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const intersecting = entries.filter((entry) => entry.isIntersecting);
-        if (intersecting.length > 0) {
-          intersecting.sort((a, b) => b.intersectionRatio - a.intersectionRatio);
-          setActiveSection(intersecting[0].target.id);
-        }
-      },
-      {
-        rootMargin: "0px -25% 0px -25%",
-        threshold: [0.1, 0.3, 0.5, 0.8],
-      },
-    );
-
-    sections.forEach((section) => observer.observe(section));
+    window.addEventListener("scroll", updateActiveSection, { passive: true });
     updateActiveSection();
     window.addEventListener("hashchange", updateActiveSection);
 
     return () => {
-      observer.disconnect();
+      window.removeEventListener("scroll", updateActiveSection);
       window.removeEventListener("hashchange", updateActiveSection);
     };
   }, [pathname]);

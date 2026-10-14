@@ -36,7 +36,7 @@ Project: personal portfolio for Joaquin Vizconde (GitHub: wacxv), built with Nex
 Rules for every task:
 - Styling: plain CSS with ids and classes in the global stylesheet. No Tailwind, no CSS-in-JS.
 - Theme: dark background (#0a0c14), red accent #DC2626 (lighter #F87171 for small text highlights), white/gray text. Define colors, spacing, radii and durations as CSS variables on :root and reuse them.
-- Animation: framer-motion, reusing the existing fadeInUp and staggerContainer variants. Only animate opacity and transform. Respect prefers-reduced-motion.
+- Animation: framer-motion, reusing the existing fadeInUp and staggerContainer variants. Only animate opacity and transform.
 - Server components by default. Add "use client" only where interactivity is needed.
 - TypeScript strict. No `any`. Define and reuse types.
 - Accessibility: semantic HTML, visible focus states, AA contrast, alt text, aria labels on icon-only controls.
