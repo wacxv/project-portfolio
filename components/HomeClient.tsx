@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion, useScroll, useSpring, useTransform } from "framer-motion";
+import { useRef } from "react";
 import { FaArrowRight, FaEnvelope, FaGithub, FaLinkedin } from "react-icons/fa";
 
 import { fadeInUp, staggerContainer } from "@/components/animation-variants";
@@ -49,17 +50,55 @@ function AnimatedTechContinuous({
   );
 }
 
-export default function HomeClient({ projects }: { projects: Project[] }) {
+function ScrollProgress() {
+  const prefersReducedMotion = useReducedMotion();
+  const { scrollYProgress } = useScroll();
+  const progress = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001,
+  });
+
   return (
-    <div id="profile-outer">
+    <motion.div
+      className="scroll-progress"
+      aria-hidden="true"
+      style={prefersReducedMotion ? undefined : { scaleX: progress }}
+    />
+  );
+}
+
+export default function HomeClient({ projects }: { projects: Project[] }) {
+  const heroRef = useRef<HTMLElement>(null);
+  const prefersReducedMotion = useReducedMotion();
+  const { scrollYProgress: heroProgress } = useScroll({
+    target: heroRef,
+    offset: ["start start", "end start"],
+  });
+  const heroOpacity = useTransform(heroProgress, [0, 1], [1, 0]);
+  const heroY = useTransform(heroProgress, [0, 1], [0, 120]);
+  const heroScale = useTransform(heroProgress, [0, 1], [1, 0.92]);
+
+  return (
+    <>
+      <ScrollProgress />
+      <div id="profile-outer">
       <div id="profile-inner">
-        <section id="home">
+        <section id="home" ref={heroRef}>
           <motion.div
-            id="hero-container"
-            initial="hidden"
-            animate="visible"
-            variants={staggerContainer}
+            id="hero-scroll-wrapper"
+            style={
+              prefersReducedMotion
+                ? undefined
+                : { opacity: heroOpacity, y: heroY, scale: heroScale }
+            }
           >
+            <motion.div
+              id="hero-container"
+              initial="hidden"
+              animate="visible"
+              variants={staggerContainer}
+            >
             <motion.h1 id="hero-greeting" variants={fadeInUp}>
               Hi, I&apos;m <span className="name-highlight">Joaquin Vizconde</span>
             </motion.h1>
@@ -102,6 +141,7 @@ export default function HomeClient({ projects }: { projects: Project[] }) {
                 <FaEnvelope />
                 <span>Email</span>
               </a>
+            </motion.div>
             </motion.div>
           </motion.div>
         </section>
@@ -197,6 +237,7 @@ export default function HomeClient({ projects }: { projects: Project[] }) {
           </motion.div>
         </section>
       </div>
-    </div>
+      </div>
+    </>
   );
 }

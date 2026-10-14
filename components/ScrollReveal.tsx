@@ -1,0 +1,53 @@
+"use client";
+
+import {
+  motion,
+  useReducedMotion,
+  useScroll,
+  useTransform,
+} from "framer-motion";
+import type { MotionValue } from "framer-motion";
+import { useRef } from "react";
+
+function RevealWord({
+  word,
+  progress,
+  disabled,
+}: {
+  word: string;
+  progress: MotionValue<number>;
+  disabled: boolean;
+}) {
+  const opacity = useTransform(progress, [0, 1], [0.15, 1]);
+
+  return (
+    <motion.span
+      aria-hidden="true"
+      style={disabled ? undefined : { opacity }}
+    >
+      {word}{" "}
+    </motion.span>
+  );
+}
+
+export default function ScrollReveal({ text }: { text: string }) {
+  const paragraphRef = useRef<HTMLParagraphElement>(null);
+  const prefersReducedMotion = useReducedMotion();
+  const { scrollYProgress } = useScroll({
+    target: paragraphRef,
+    offset: ["start 0.8", "end 0.4"],
+  });
+
+  return (
+    <motion.p ref={paragraphRef} aria-label={text}>
+      {text.split(/\s+/).map((word, index) => (
+        <RevealWord
+          key={`${word}-${index}`}
+          word={word}
+          progress={scrollYProgress}
+          disabled={prefersReducedMotion !== false}
+        />
+      ))}
+    </motion.p>
+  );
+}
