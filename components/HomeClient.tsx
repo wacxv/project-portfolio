@@ -309,8 +309,6 @@ export default function HomeClient({
           </div>
         </section>
 
-        <PhotoStrip />
-
         <section id="about">
           <motion.div
             className="content-section about-section"
@@ -340,6 +338,8 @@ export default function HomeClient({
             </div>
           </motion.div>
         </section>
+
+        <PhotoStrip />
 
         <section id="skills">
           <motion.div

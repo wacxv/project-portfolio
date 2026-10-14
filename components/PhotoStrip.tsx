@@ -30,7 +30,7 @@ function PhotoSet({ duplicate = false }: { duplicate?: boolean }) {
             width={1000}
             height={1333}
             loading="lazy"
-            sizes="(max-width: 768px) 180px, 240px"
+            sizes="(max-width: 768px) 72vw, 340px"
           />
         </div>
       ))}
@@ -41,6 +41,7 @@ function PhotoSet({ duplicate = false }: { duplicate?: boolean }) {
 export default function PhotoStrip() {
   const sectionRef = useRef<HTMLElement>(null);
   const [isInView, setIsInView] = useState(false);
+  const [isPaused, setIsPaused] = useState(false);
 
   useEffect(() => {
     const section = sectionRef.current;
@@ -60,8 +61,9 @@ export default function PhotoStrip() {
   return (
     <section
       id="gallery"
-      className={`photo-strip-section${isInView ? " is-in-view" : ""}`}
+      className={`photo-strip-section${isInView ? " is-in-view" : ""}${isPaused ? " is-paused" : ""}`}
       ref={sectionRef}
+      aria-labelledby="gallery-heading"
     >
       <motion.div
         className="photo-strip-copy"
@@ -71,17 +73,29 @@ export default function PhotoStrip() {
         variants={fadeInUp}
       >
         <p className="photo-strip-label">{STRIP_LABEL}</p>
-        <h2>
+        <h2 id="gallery-heading">
           {STRIP_HEADING.before}
           <span>{STRIP_HEADING.highlight}</span>
           {STRIP_HEADING.after}
         </h2>
         <p>{STRIP_DESCRIPTION}</p>
+        <button
+          type="button"
+          className="photo-strip-toggle"
+          aria-controls="gallery-photos"
+          aria-pressed={isPaused}
+          onClick={() => setIsPaused((paused) => !paused)}
+        >
+          {isPaused ? "Resume photos" : "Pause photos"}
+        </button>
       </motion.div>
       <div
         className="photo-strip-viewport"
+        id="gallery-photos"
         tabIndex={0}
-        aria-label="Photo strip"
+        role="region"
+        aria-label="Photos from my walks. Motion pauses on hover or keyboard focus."
+        data-lenis-prevent
       >
         <div className="photo-strip-track">
           <PhotoSet />
