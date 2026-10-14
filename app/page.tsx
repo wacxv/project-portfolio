@@ -63,56 +63,58 @@ export default function Home() {
   return (
     <div id="profile-outer">
       <div id="profile-inner">
-        <motion.div
-          id="hero-container"
-          initial="hidden"
-          animate="visible"
-          variants={staggerContainer}
-        >
-          <motion.h1 id="hero-greeting" variants={fadeInUp}>
-            Hi, I&apos;m <span className="name-highlight">Joaquin Vizconde</span>
-          </motion.h1>
-          <motion.h2 id="hero-title" variants={fadeInUp}>
-            a Full-Stack Developer
-          </motion.h2>
-          <motion.p id="hero-description" variants={fadeInUp}>
-            I&apos;m too{" "}
-            <AnimatedTechContinuous text="caffeinated" /> to sit still, so I
-            build things instead. Clean code, sharp interfaces, and{" "}
-            <AnimatedTechContinuous text="zero chill" baseDelay={0.5} />.
-          </motion.p>
-          <motion.div variants={fadeInUp}>
-            <Link href="/contact" id="cta-button">
-              Get in Touch
-            </Link>
+        <section id="home">
+          <motion.div
+            id="hero-container"
+            initial="hidden"
+            animate="visible"
+            variants={staggerContainer}
+          >
+            <motion.h1 id="hero-greeting" variants={fadeInUp}>
+              Hi, I&apos;m <span className="name-highlight">Joaquin Vizconde</span>
+            </motion.h1>
+            <motion.h2 id="hero-title" variants={fadeInUp}>
+              a Full-Stack Developer
+            </motion.h2>
+            <motion.p id="hero-description" variants={fadeInUp}>
+              I&apos;m too{" "}
+              <AnimatedTechContinuous text="caffeinated" /> to sit still, so I
+              build things instead. Clean code, sharp interfaces, and{" "}
+              <AnimatedTechContinuous text="zero chill" baseDelay={0.5} />.
+            </motion.p>
+            <motion.div variants={fadeInUp}>
+              <Link href="/#contact" id="cta-button">
+                Get in Touch
+              </Link>
+            </motion.div>
+            <motion.div className="hero-socials" variants={fadeInUp}>
+              <a
+                href="https://github.com/wacxv"
+                className="social-link"
+                aria-label="GitHub"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <FaGithub />
+                <span>GitHub</span>
+              </a>
+              <a
+                href="https://www.linkedin.com/in/joaquin-carlos-vizconde"
+                className="social-link"
+                aria-label="LinkedIn"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <FaLinkedin />
+                <span>LinkedIn</span>
+              </a>
+              <a href="mailto:your.email@example.com" className="social-link" aria-label="Email">
+                <FaEnvelope />
+                <span>Email</span>
+              </a>
+            </motion.div>
           </motion.div>
-          <motion.div className="hero-socials" variants={fadeInUp}>
-            <a
-              href="https://github.com/wacxv"
-              className="social-link"
-              aria-label="GitHub"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <FaGithub />
-              <span>GitHub</span>
-            </a>
-            <a
-              href="https://www.linkedin.com/in/joaquin-carlos-vizconde"
-              className="social-link"
-              aria-label="LinkedIn"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <FaLinkedin />
-              <span>LinkedIn</span>
-            </a>
-            <a href="mailto:your.email@example.com" className="social-link" aria-label="Email">
-              <FaEnvelope />
-              <span>Email</span>
-            </a>
-          </motion.div>
-        </motion.div>
+        </section>
 
         <motion.div
           id="section-divider"
@@ -123,37 +125,91 @@ export default function Home() {
           style={{ transformOrigin: "left" }}
         />
 
-        <div id="projects-section-container">
-          <motion.h2
-            id="section-title"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.6 }}
-          >
-            Recent Projects
-          </motion.h2>
+        <section id="projects">
+          <div id="projects-section-container">
+            <motion.h2
+              className="section-title"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.6 }}
+            >
+              Recent Projects
+            </motion.h2>
+            <motion.div
+              id="projects-grid"
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.2 }}
+              variants={staggerContainer}
+            />
+            <motion.div
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.4, duration: 0.6 }}
+            >
+              <Link href="/projects" id="view-all-link">
+                View All Projects
+                <FaArrowRight />
+              </Link>
+            </motion.div>
+          </div>
+        </section>
+
+        <section id="skills">
           <motion.div
-            id="projects-grid"
+            className="content-section"
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.2 }}
             variants={staggerContainer}
           >
+            <motion.h2 className="section-title" variants={fadeInUp}>Skills</motion.h2>
+            <div className="placeholder-grid">
+              {["Frontend", "Backend", "Database", "Tools"].map((category) => (
+                <motion.div className="placeholder-card" variants={fadeInUp} key={category}>
+                  <h3>{category}</h3>
+                  <ul>
+                    <li>TODO: Add {category.toLowerCase()} skills</li>
+                  </ul>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+        </section>
 
-          </motion.div>
+        <section id="experience">
           <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.4, duration: 0.6 }}
+            className="content-section"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+            variants={staggerContainer}
           >
-            <Link href="/projects" id="view-all-link">
-              View All Projects
-              <FaArrowRight />
-            </Link>
+            <motion.h2 className="section-title" variants={fadeInUp}>Experience</motion.h2>
+            <motion.ol className="experience-list" variants={staggerContainer}>
+              <motion.li variants={fadeInUp}><strong>Education</strong><span>TODO: Add education details</span></motion.li>
+              <motion.li variants={fadeInUp}><strong>Experience</strong><span>TODO: Add work experience</span></motion.li>
+            </motion.ol>
           </motion.div>
-        </div>
+        </section>
+
+        <section id="contact">
+          <motion.div
+            className="content-section contact-section"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+            variants={staggerContainer}
+          >
+            <motion.h2 className="section-title" variants={fadeInUp}>Get in Touch</motion.h2>
+            <motion.p variants={fadeInUp}>Have a project in mind? I&apos;d love to hear from you.</motion.p>
+            <motion.a href="mailto:your.email@example.com" className="contact-button" variants={fadeInUp}>
+              Email Me
+            </motion.a>
+          </motion.div>
+        </section>
       </div>
     </div>
   );

@@ -3,18 +3,32 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 
 import type { GitHubProfile } from "@/lib/github";
 
 const navigation = [
-  { href: "/", label: "Home" },
-  { href: "/projects", label: "Projects" },
-  { href: "/skills", label: "Skills" },
-  { href: "/experience", label: "Experience" },
+  { href: "/#home", label: "Home" },
+  { href: "/#projects", label: "Projects" },
+  { href: "/#skills", label: "Skills" },
+  { href: "/#experience", label: "Experience" },
+  { href: "/#contact", label: "Contact" },
 ];
 
 export default function Header({ profile }: { profile: GitHubProfile }) {
   const pathname = usePathname();
+  const [activeSection, setActiveSection] = useState("home");
+
+  useEffect(() => {
+    const updateActiveSection = () => {
+      setActiveSection(window.location.hash.slice(1) || "home");
+    };
+
+    updateActiveSection();
+    window.addEventListener("hashchange", updateActiveSection);
+
+    return () => window.removeEventListener("hashchange", updateActiveSection);
+  }, []);
 
   return (
     <header id="header-outer">
@@ -28,8 +42,8 @@ export default function Header({ profile }: { profile: GitHubProfile }) {
             {navigation.map((item) => (
               <Link
                 href={item.href}
-                className={`nav-link${pathname === item.href ? " active" : ""}`}
-                aria-current={pathname === item.href ? "page" : undefined}
+                className={`nav-link${pathname === "/" && activeSection === item.href.slice(2) ? " active" : ""}`}
+                aria-current={pathname === "/" && activeSection === item.href.slice(2) ? "page" : undefined}
                 key={item.href}
               >
                 {item.label}

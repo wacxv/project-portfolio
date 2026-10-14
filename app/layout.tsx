@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Header from "@/components/Header";
 import { getGitHubProfile } from "@/lib/github";
+import SmoothScroll from "@/components/SmoothScroll";
 
 export const metadata: Metadata = {
   title: "Joaquin Vizconde | Full-Stack Developer",
@@ -14,8 +15,10 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en">
       <body>
-        <Header profile={profile} />
-        {children}
+        <SmoothScroll>
+          <Header profile={profile} />
+          {children}
+        </SmoothScroll>
       </body>
     </html>
   );
