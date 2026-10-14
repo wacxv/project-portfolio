@@ -45,6 +45,149 @@ html.lenis body {
   color: #9ca3af;
 }
 
+#projects-grid,
+.projects-page-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.25rem;
+}
+
+.project-card {
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  background: rgba(17, 23, 34, 0.72);
+  transition: border-color 0.3s ease, transform 0.3s ease;
+}
+
+.project-card:hover {
+  border-color: #dc2626;
+  transform: translateY(-4px);
+}
+
+.project-card-image {
+  display: block;
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.project-card-image-placeholder {
+  background: linear-gradient(135deg, #1f2937, #111722);
+}
+
+.project-card-content {
+  padding: 1.25rem;
+}
+
+.project-card h3 {
+  margin: 0;
+  color: #ffffff;
+}
+
+.project-card p {
+  color: #9ca3af;
+  line-height: 1.6;
+}
+
+.project-tech-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding: 0;
+  margin: 1rem 0;
+  list-style: none;
+}
+
+.project-tech-tags li,
+.project-filter {
+  padding: 0.35rem 0.65rem;
+  border: 1px solid rgba(248, 113, 113, 0.45);
+  border-radius: 999px;
+  color: #fca5a5;
+  background: rgba(220, 38, 38, 0.08);
+  font-size: 0.85rem;
+}
+
+.project-card-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.project-card-links a,
+.back-to-home {
+  color: #f87171;
+  text-underline-offset: 3px;
+}
+
+.project-card-links a:hover,
+.back-to-home:hover {
+  color: #dc2626;
+}
+
+.projects-empty {
+  grid-column: 1 / -1;
+  color: #9ca3af;
+}
+
+.projects-page {
+  min-height: 100vh;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 8rem 2rem 4rem;
+}
+
+.projects-page h1 {
+  margin: 2rem 0 0.5rem;
+  color: #ffffff;
+}
+
+.projects-page-intro {
+  margin-bottom: 2rem;
+  color: #9ca3af;
+}
+
+.project-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  margin-bottom: 2rem;
+}
+
+.project-filter {
+  cursor: pointer;
+  font: inherit;
+}
+
+.project-filter:hover,
+.project-filter.is-active {
+  border-color: #dc2626;
+  background: rgba(220, 38, 38, 0.22);
+  color: #ffffff;
+}
+
+.project-filter:focus-visible,
+.project-card-links a:focus-visible,
+.back-to-home:focus-visible {
+  outline: 2px solid #f87171;
+  outline-offset: 3px;
+}
+
+@media (max-width: 900px) {
+  #projects-grid,
+  .projects-page-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 600px) {
+  #projects-grid,
+  .projects-page-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 .admin-shell {
   min-height: 100vh;
   background: #0a0e14;
