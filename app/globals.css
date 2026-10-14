@@ -9,6 +9,107 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+.projects-carousel {
+  position: relative;
+  min-width: 0;
+}
+
+.projects-carousel:focus-visible {
+  outline: 2px solid #f87171;
+  outline-offset: 6px;
+}
+
+.projects-carousel-viewport {
+  overflow: hidden;
+  touch-action: pan-y;
+}
+
+.projects-carousel-container {
+  display: flex;
+  gap: 1.25rem;
+  backface-visibility: hidden;
+}
+
+.projects-carousel-slide {
+  min-width: 0;
+  flex: 0 0 40%;
+}
+
+.projects-carousel .project-card {
+  height: 100%;
+  aspect-ratio: auto;
+}
+
+.projects-carousel .project-card img {
+  object-fit: cover;
+}
+
+.projects-carousel-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1.25rem;
+}
+
+.projects-carousel-button,
+.projects-carousel-dot {
+  border: 0;
+  cursor: pointer;
+}
+
+.projects-carousel-button {
+  display: grid;
+  width: 2.25rem;
+  height: 2.25rem;
+  place-items: center;
+  border-radius: 50%;
+  background: rgba(220, 38, 38, 0.15);
+  color: #f87171;
+  font-size: 1.2rem;
+}
+
+.projects-carousel-button:hover:not(:disabled) {
+  background: rgba(220, 38, 38, 0.3);
+  color: #ffffff;
+}
+
+.projects-carousel-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.35;
+}
+
+.projects-carousel-dots {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.projects-carousel-dot {
+  width: 0.55rem;
+  height: 0.55rem;
+  padding: 0;
+  border-radius: 50%;
+  background: #6b7280;
+}
+
+.projects-carousel-dot.is-active {
+  background: #dc2626;
+  transform: scale(1.25);
+}
+
+.projects-carousel-button:focus-visible,
+.projects-carousel-dot:focus-visible {
+  outline: 2px solid #f87171;
+  outline-offset: 3px;
+}
+
+@media (max-width: 700px) {
+  .projects-carousel-slide {
+    flex-basis: 85%;
+  }
+}
+
 html.lenis,
 html.lenis body {
   height: auto;

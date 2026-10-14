@@ -23,6 +23,8 @@
 # misc
 .DS_Store
 *.pem
+/photos-original/
+resize-photos.mjs
 
 # debug
 npm-debug.log*

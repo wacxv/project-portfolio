@@ -4,8 +4,8 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { FaArrowRight, FaEnvelope, FaGithub, FaLinkedin } from "react-icons/fa";
 
-import ProjectCard from "@/components/ProjectCard";
 import { fadeInUp, staggerContainer } from "@/components/animation-variants";
+import ProjectsCarousel from "@/components/ProjectsCarousel";
 import type { Project } from "@/db/schema";
 
 const CONTACT_EMAIL = "your.email@example.com";
@@ -125,21 +125,7 @@ export default function HomeClient({ projects }: { projects: Project[] }) {
             >
               Recent Projects
             </motion.h2>
-            <motion.div
-              id="projects-grid"
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.2 }}
-              variants={staggerContainer}
-            >
-              {projects.length > 0 ? (
-                projects.map((project) => (
-                  <ProjectCard key={project.id} project={project} />
-                ))
-              ) : (
-                <p className="projects-empty">No featured projects yet.</p>
-              )}
-            </motion.div>
+            <ProjectsCarousel projects={projects} />
             <motion.div
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
