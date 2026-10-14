@@ -38,6 +38,16 @@
   --size-skill-icon: 1rem;
   --size-skills-section: clamp(720px, 82vw, 1120px);
   --gap-contact-actions: 2rem;
+  --size-contact-section: clamp(540px, 52vw, 760px);
+  --gap-contact-form: 1rem;
+  --space-contact-field-y: 0.65rem;
+  --space-contact-field-x: 0.85rem;
+  --space-contact-button-y: 0.7rem;
+  --space-contact-button-x: 1.25rem;
+  --size-footer-width: clamp(240px, 20vw, 300px);
+  --space-footer: 1.25rem;
+  --gap-footer: 1rem;
+  --font-footer: 0.875rem;
 }
 
 html,
@@ -58,7 +68,16 @@ body {
 
 .contact-form {
   display: grid;
-  gap: 1.25rem;
+  gap: var(--gap-contact-form);
+}
+
+.contact-form .form-field input,
+.contact-form .form-field textarea {
+  padding: var(--space-contact-field-y) var(--space-contact-field-x);
+}
+
+.contact-form .contact-submit {
+  padding: var(--space-contact-button-y) var(--space-contact-button-x);
 }
 
 .contact-actions {
@@ -222,11 +241,28 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.75rem;
-  padding: 3rem 1rem;
+  gap: var(--gap-footer);
+  padding: var(--space-footer);
   border-top: 1px solid rgba(255, 255, 255, 0.08);
   color: var(--color-muted);
   text-align: center;
+  font-size: var(--font-footer);
+  line-height: 1.6;
+}
+
+.site-footer .social-link {
+  font-size: inherit;
+}
+
+.site-footer .footer-socials {
+  gap: var(--gap-footer);
+  justify-content: center;
+}
+
+.site-footer .back-to-top {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--gap-skill-list);
 }
 
 .site-footer p {
@@ -1350,7 +1386,15 @@ section {
 }
 
 .page-horizontal #contact {
-  width: clamp(680px, 72vw, 1100px);
+  width: var(--size-contact-section);
+}
+
+#contact .contact-section {
+  gap: var(--gap-contact-form);
+}
+
+#contact .section-header {
+  margin-bottom: var(--gap-contact-form);
 }
 
 .page-horizontal .contact-content {
@@ -1358,12 +1402,12 @@ section {
   overflow-y: auto;
   padding-right: 0.75rem;
   gap: 2rem;
-  margin-top: 1rem;
+  margin-top: 0;
 }
 
 .page-horizontal .site-footer {
-  width: clamp(280px, 26vw, 380px);
-  height: 100%;
+  width: var(--size-footer-width);
+  height: auto;
   max-height: calc(100vh - 140px);
   align-self: center;
   flex-shrink: 0;
@@ -1373,8 +1417,8 @@ section {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 1.5rem;
-  padding: 2rem;
+  gap: var(--gap-footer);
+  padding: var(--space-footer);
   box-sizing: border-box;
   text-align: center;
 }
@@ -1959,6 +2003,10 @@ section {
     width: calc(100vw - 2rem);
   }
 
+  .page-horizontal #contact {
+    width: calc(100vw - 2rem);
+  }
+
   .page-horizontal #skills .content-section {
     margin-block: 0;
   }
@@ -2009,7 +2057,7 @@ section {
   .page-horizontal .site-footer {
     width: calc(100vw - 2rem);
     min-width: calc(100vw - 2rem);
-    height: calc(100vh - 90px);
+    height: auto;
     border-left: none;
     border-top: 1px solid rgba(255, 255, 255, 0.08);
   }

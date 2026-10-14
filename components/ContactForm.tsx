@@ -139,7 +139,7 @@ export default function ContactForm({ contactEmail }: { contactEmail: string }) 
           onChange={(event) => updateField("message", event.target.value)}
           aria-invalid={Boolean(fieldErrors.message)}
           aria-describedby={fieldErrors.message ? "contact-message-error" : undefined}
-          rows={6}
+          rows={4}
           required
         />
         {fieldErrors.message && <p id="contact-message-error" className="field-error">{fieldErrors.message}</p>}

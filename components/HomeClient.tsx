@@ -71,7 +71,7 @@ import {
 } from "@/data/profile";
 import type { Project } from "@/db/schema";
 
-const CONTACT_EMAIL = "your.email@example.com";
+const CONTACT_EMAIL = "jcsvizconde@gmail.com";
 
 function AnimatedTechContinuous({
   text,
@@ -468,7 +468,8 @@ export default function HomeClient({
             <a href="https://www.linkedin.com/in/joaquin-carlos-vizconde" className="social-link" target="_blank" rel="noopener noreferrer">LinkedIn</a>
             <a href={`mailto:${CONTACT_EMAIL}`} className="social-link">Email</a>
           </div>
-          <p>&copy; {currentYear ?? ""} Joaquin Vizconde. All rights reserved.</p>
+          <p>&copy; {currentYear ?? ""} Joaquin Vizconde.</p>
+          <p>All rights reserved.</p>
           <p>Built with Next.js</p>
           <a
             className="back-to-top"
@@ -479,7 +480,7 @@ export default function HomeClient({
               window.history.pushState(null, "", "/#home");
             }}
           >
-            Back to start <FaArrowLeft aria-hidden="true" />
+           <FaArrowLeft aria-hidden="true" />
           </a>
         </footer>
       </div>
