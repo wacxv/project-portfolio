@@ -456,25 +456,8 @@ export default function HomeClient({
             <motion.p variants={fadeInUp}>Have a project in mind? I&apos;d love to hear from you.</motion.p>
             <div className="contact-content">
               <motion.div className="contact-form-wrapper" variants={fadeInUp}>
-                <ContactForm />
+                <ContactForm contactEmail={CONTACT_EMAIL} />
               </motion.div>
-              <motion.aside className="contact-details" variants={fadeInUp}>
-                <h3>Prefer email?</h3>
-                <a href={`mailto:${CONTACT_EMAIL}`} className="contact-button">
-                  <FaEnvelope aria-hidden="true" />
-                  Email Me
-                </a>
-                <div className="contact-socials">
-                  <a href="https://github.com/wacxv" className="social-link" target="_blank" rel="noopener noreferrer">
-                    <FaGithub aria-hidden="true" />
-                    <span>GitHub</span>
-                  </a>
-                  <a href="https://www.linkedin.com/in/joaquin-carlos-vizconde" className="social-link" target="_blank" rel="noopener noreferrer">
-                    <FaLinkedin aria-hidden="true" />
-                    <span>LinkedIn</span>
-                  </a>
-                </div>
-              </motion.aside>
             </div>
           </motion.div>
         </section>

@@ -28,14 +28,16 @@
   --space-gallery-stagger: 0.75rem;
   --radius-gallery: 1rem;
   --duration-gallery-loop: 90s;
-  --space-skill-card: 0.75rem;
-  --gap-skills-grid: 0.75rem;
-  --gap-skill-list: 0.375rem;
-  --space-skill-tag-y: 0.25rem;
-  --space-skill-tag-x: 0.4rem;
-  --font-skill-heading: 0.95rem;
-  --font-skill-tag: 0.8rem;
-  --size-skill-icon: 0.9rem;
+  --space-skill-card: 0.9rem;
+  --gap-skills-grid: 0.875rem;
+  --gap-skill-list: 0.45rem;
+  --space-skill-tag-y: 0.3rem;
+  --space-skill-tag-x: 0.55rem;
+  --font-skill-heading: 1rem;
+  --font-skill-tag: 0.85rem;
+  --size-skill-icon: 1rem;
+  --size-skills-section: clamp(720px, 82vw, 1120px);
+  --gap-contact-actions: 2rem;
 }
 
 html,
@@ -49,7 +51,7 @@ body {
 
 .contact-content {
   display: grid;
-  grid-template-columns: minmax(0, 2fr) minmax(12rem, 1fr);
+  grid-template-columns: minmax(0, 1fr);
   gap: 3rem;
   margin-top: 2rem;
 }
@@ -57,6 +59,27 @@ body {
 .contact-form {
   display: grid;
   gap: 1.25rem;
+}
+
+.contact-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--gap-contact-actions);
+}
+
+.contact-email-link {
+  color: var(--color-text);
+  text-underline-offset: 0.2em;
+}
+
+.contact-email-link:hover {
+  color: var(--color-accent-light);
+}
+
+.contact-email-link:focus-visible {
+  outline: 2px solid var(--color-accent-light);
+  outline-offset: 4px;
 }
 
 .form-field {
@@ -1297,7 +1320,7 @@ section {
 }
 
 .page-horizontal #skills {
-  width: clamp(720px, 90vw, 1280px);
+  width: var(--size-skills-section);
   overflow-y: auto;
 }
 
@@ -1312,7 +1335,7 @@ section {
 
 .page-horizontal .skills-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: var(--gap-skills-grid);
 }
 
@@ -1522,7 +1545,7 @@ section {
 
 .skills-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: var(--gap-skills-grid);
 }
 

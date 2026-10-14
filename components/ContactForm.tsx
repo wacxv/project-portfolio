@@ -30,7 +30,7 @@ function validate(values: typeof initialValues): FieldErrors {
   return errors;
 }
 
-export default function ContactForm() {
+export default function ContactForm({ contactEmail }: { contactEmail: string }) {
   const [values, setValues] = useState(initialValues);
   const [fieldErrors, setFieldErrors] = useState<FieldErrors>({});
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
@@ -145,10 +145,15 @@ export default function ContactForm() {
         {fieldErrors.message && <p id="contact-message-error" className="field-error">{fieldErrors.message}</p>}
       </div>
 
-      <button className="contact-submit" type="submit" disabled={status === "sending"}>
-        {status === "sending" && <span className="button-spinner" aria-hidden="true" />}
-        {status === "sending" ? "Sending..." : "Send Message"}
-      </button>
+      <div className="contact-actions">
+        <button className="contact-submit" type="submit" disabled={status === "sending"}>
+          {status === "sending" && <span className="button-spinner" aria-hidden="true" />}
+          {status === "sending" ? "Sending..." : "Send Message"}
+        </button>
+        <a href={`mailto:${contactEmail}`} className="contact-email-link">
+          Prefer email?
+        </a>
+      </div>
 
       <p className={`form-status form-status-${status}`} role="status" aria-live="polite">
         {message}
