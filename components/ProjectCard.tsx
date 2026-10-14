@@ -3,13 +3,14 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { fadeInUp } from "@/components/animation-variants";
 import type { Project } from "@/db/schema";
 
 export default function ProjectCard({ project }: { project: Project }) {
   const cardRef = useRef<HTMLElement>(null);
+  const [isMounted, setIsMounted] = useState(false);
   const prefersReducedMotion = useReducedMotion();
   const { scrollYProgress } = useScroll({
     target: cardRef,
@@ -18,13 +19,18 @@ export default function ProjectCard({ project }: { project: Project }) {
   const cardOpacity = useTransform(scrollYProgress, [0, 1], [0, 1]);
   const cardScale = useTransform(scrollYProgress, [0, 1], [0.95, 1]);
 
+  useEffect(() => {
+    const frame = requestAnimationFrame(() => setIsMounted(true));
+    return () => cancelAnimationFrame(frame);
+  }, []);
+
   return (
     <motion.article
       ref={cardRef}
       className="project-card"
       variants={fadeInUp}
       style={
-        prefersReducedMotion
+        !isMounted || prefersReducedMotion
           ? undefined
           : { opacity: cardOpacity, scale: cardScale }
       }

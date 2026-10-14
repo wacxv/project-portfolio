@@ -7,7 +7,7 @@ import {
   useTransform,
 } from "framer-motion";
 import type { MotionValue } from "framer-motion";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 function RevealWord({
   word,
@@ -32,11 +32,17 @@ function RevealWord({
 
 export default function ScrollReveal({ text }: { text: string }) {
   const paragraphRef = useRef<HTMLParagraphElement>(null);
+  const [isMounted, setIsMounted] = useState(false);
   const prefersReducedMotion = useReducedMotion();
   const { scrollYProgress } = useScroll({
     target: paragraphRef,
     offset: ["start 0.8", "end 0.4"],
   });
+
+  useEffect(() => {
+    const frame = requestAnimationFrame(() => setIsMounted(true));
+    return () => cancelAnimationFrame(frame);
+  }, []);
 
   return (
     <motion.p ref={paragraphRef} aria-label={text}>
@@ -45,7 +51,7 @@ export default function ScrollReveal({ text }: { text: string }) {
           key={`${word}-${index}`}
           word={word}
           progress={scrollYProgress}
-          disabled={prefersReducedMotion !== false}
+          disabled={!isMounted || prefersReducedMotion !== false}
         />
       ))}
     </motion.p>

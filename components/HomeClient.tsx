@@ -2,12 +2,48 @@
 
 import Link from "next/link";
 import { motion, useReducedMotion, useScroll, useSpring, useTransform } from "framer-motion";
-import { useRef } from "react";
-import { FaArrowRight, FaEnvelope, FaGithub, FaLinkedin } from "react-icons/fa";
+import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
+import type { ComponentType } from "react";
+import {
+  FaArrowRight,
+  FaAws,
+  FaEnvelope,
+  FaGithub,
+  FaGitAlt,
+  FaLinkedin,
+  FaPython,
+} from "react-icons/fa";
+import {
+  SiAngular,
+  SiBootstrap,
+  SiCss,
+  SiExpress,
+  SiHtml5,
+  SiMongodb,
+  SiMysql,
+  SiNodedotjs,
+  SiOpencv,
+  SiPostgresql,
+  SiPostman,
+  SiReact,
+  SiTauri,
+  SiTypescript,
+  SiVercel,
+} from "react-icons/si";
+import { MdApi, MdSecurity, MdWeb } from "react-icons/md";
 
 import { fadeInUp, staggerContainer } from "@/components/animation-variants";
 import PhotoStrip from "@/components/PhotoStrip";
 import ProjectsCarousel from "@/components/ProjectsCarousel";
+import ScrollReveal from "@/components/ScrollReveal";
+import {
+  ABOUT_TEXT,
+  CURRENTLY_LEARNING,
+  SKILL_CATEGORIES,
+  TIMELINE_ENTRIES,
+  type SkillItem,
+} from "@/data/profile";
 import type { Project } from "@/db/schema";
 
 const CONTACT_EMAIL = "your.email@example.com";
@@ -52,6 +88,7 @@ function AnimatedTechContinuous({
 
 function ScrollProgress() {
   const prefersReducedMotion = useReducedMotion();
+  const [isMounted, setIsMounted] = useState(false);
   const { scrollYProgress } = useScroll();
   const progress = useSpring(scrollYProgress, {
     stiffness: 100,
@@ -59,17 +96,66 @@ function ScrollProgress() {
     restDelta: 0.001,
   });
 
+  useEffect(() => {
+    const frame = requestAnimationFrame(() => setIsMounted(true));
+    return () => cancelAnimationFrame(frame);
+  }, []);
+
   return (
     <motion.div
       className="scroll-progress"
       aria-hidden="true"
-      style={prefersReducedMotion ? undefined : { scaleX: progress }}
+      initial={false}
+      style={{
+        scaleX: isMounted && !prefersReducedMotion ? progress : 0,
+      }}
     />
   );
 }
 
-export default function HomeClient({ projects }: { projects: Project[] }) {
+const SKILL_ICONS: Record<string, ComponentType<{ "aria-hidden"?: boolean }>> = {
+  angular: SiAngular,
+  api: MdApi,
+  aws: FaAws,
+  bootstrap: SiBootstrap,
+  css: SiCss,
+  dotnet: MdWeb,
+  express: SiExpress,
+  git: FaGitAlt,
+  github: FaGithub,
+  html: SiHtml5,
+  jwt: MdSecurity,
+  mariadb: SiMysql,
+  mongodb: SiMongodb,
+  mysql: SiMysql,
+  node: SiNodedotjs,
+  opencv: SiOpencv,
+  postgresql: SiPostgresql,
+  postman: SiPostman,
+  python: FaPython,
+  react: SiReact,
+  rust: MdWeb,
+  security: MdSecurity,
+  tauri: SiTauri,
+  typescript: SiTypescript,
+  vercel: SiVercel,
+  webrtc: MdWeb,
+};
+
+function SkillIcon({ item }: { item: SkillItem }) {
+  const Icon = SKILL_ICONS[item.icon] ?? MdWeb;
+  return <Icon aria-hidden />;
+}
+
+export default function HomeClient({
+  projects,
+  avatarUrl,
+}: {
+  projects: Project[];
+  avatarUrl: string;
+}) {
   const heroRef = useRef<HTMLElement>(null);
+  const [isMounted, setIsMounted] = useState(false);
   const prefersReducedMotion = useReducedMotion();
   const { scrollYProgress: heroProgress } = useScroll({
     target: heroRef,
@@ -78,6 +164,11 @@ export default function HomeClient({ projects }: { projects: Project[] }) {
   const heroOpacity = useTransform(heroProgress, [0, 1], [1, 0]);
   const heroY = useTransform(heroProgress, [0, 1], [0, 120]);
   const heroScale = useTransform(heroProgress, [0, 1], [1, 0.92]);
+
+  useEffect(() => {
+    const frame = requestAnimationFrame(() => setIsMounted(true));
+    return () => cancelAnimationFrame(frame);
+  }, []);
 
   return (
     <>
@@ -88,7 +179,7 @@ export default function HomeClient({ projects }: { projects: Project[] }) {
           <motion.div
             id="hero-scroll-wrapper"
             style={
-              prefersReducedMotion
+              !isMounted || prefersReducedMotion
                 ? undefined
                 : { opacity: heroOpacity, y: heroY, scale: heroScale }
             }
@@ -183,6 +274,33 @@ export default function HomeClient({ projects }: { projects: Project[] }) {
 
         <PhotoStrip />
 
+        <section id="about">
+          <motion.div
+            className="content-section about-section"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+            variants={staggerContainer}
+          >
+            <motion.div className="about-image-wrapper" variants={fadeInUp}>
+              <Image
+                src={avatarUrl}
+                alt="Joaquin Vizconde"
+                width={480}
+                height={480}
+                className="about-image"
+              />
+            </motion.div>
+            <div className="about-content">
+              <motion.h2 className="section-title" variants={fadeInUp}>About</motion.h2>
+              <ScrollReveal text={ABOUT_TEXT.join(" ")} />
+              <motion.p className="currently-learning" variants={fadeInUp}>
+                {CURRENTLY_LEARNING}
+              </motion.p>
+            </div>
+          </motion.div>
+        </section>
+
         <section id="skills">
           <motion.div
             className="content-section"
@@ -192,12 +310,17 @@ export default function HomeClient({ projects }: { projects: Project[] }) {
             variants={staggerContainer}
           >
             <motion.h2 className="section-title" variants={fadeInUp}>Skills</motion.h2>
-            <div className="placeholder-grid">
-              {["Frontend", "Backend", "Database", "Tools"].map((category) => (
-                <motion.div className="placeholder-card" variants={fadeInUp} key={category}>
-                  <h3>{category}</h3>
-                  <ul>
-                    <li>TODO: Add {category.toLowerCase()} skills</li>
+            <div className="skills-grid">
+              {SKILL_CATEGORIES.map((category) => (
+                <motion.div className="skill-card" variants={fadeInUp} key={category.key}>
+                  <h3>{category.label}</h3>
+                  <ul className="skill-list">
+                    {category.items.map((item) => (
+                      <li key={item.name}>
+                        <SkillIcon item={item} />
+                        <span>{item.name}</span>
+                      </li>
+                    ))}
                   </ul>
                 </motion.div>
               ))}
@@ -215,8 +338,17 @@ export default function HomeClient({ projects }: { projects: Project[] }) {
           >
             <motion.h2 className="section-title" variants={fadeInUp}>Experience</motion.h2>
             <motion.ol className="experience-list" variants={staggerContainer}>
-              <motion.li variants={fadeInUp}><strong>Education</strong><span>TODO: Add education details</span></motion.li>
-              <motion.li variants={fadeInUp}><strong>Experience</strong><span>TODO: Add work experience</span></motion.li>
+              {TIMELINE_ENTRIES.map((entry) => (
+                <motion.li className="experience-entry" variants={fadeInUp} key={`${entry.title}-${entry.dates}`}>
+                  <div className="experience-dot" aria-hidden="true" />
+                  <div className="experience-entry-content">
+                    <p className="experience-dates">{entry.dates}</p>
+                    <h3>{entry.title}</h3>
+                    <p className="experience-place">{entry.place}</p>
+                    <p>{entry.description}</p>
+                  </div>
+                </motion.li>
+              ))}
             </motion.ol>
           </motion.div>
         </section>
