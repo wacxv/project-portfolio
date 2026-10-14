@@ -17,6 +17,7 @@
     "@neon/config": "^1.9.1",
     "@neon/env": "^1.6.2",
     "@neondatabase/serverless": "^1.2.0",
+    "@vercel/blob": "^2.8.2",
     "bcryptjs": "^3.0.3",
     "dotenv": "^18.0.7",
     "drizzle-orm": "^0.45.4",

@@ -1,4 +1,5 @@
 import { cookies } from "next/headers";
+import { connection } from "next/server";
 import { jwtVerify, SignJWT } from "jose";
 
 const SESSION_COOKIE = "portfolio_session";
@@ -36,6 +37,9 @@ export async function createSession(email: string): Promise<void> {
 }
 
 export async function getSession(): Promise<Session | null> {
+  // JWT expiry checks depend on the current time and must run per request.
+  // Keep this outside the catch so rendering signals can reach Next.js.
+  await connection();
   try {
     const token = (await cookies()).get(SESSION_COOKIE)?.value;
     return token ? verifySessionToken(token) : null;

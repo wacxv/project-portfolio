@@ -9,6 +9,10 @@
   --color-muted: #9ca3af;
   --radius-control: 6px;
   --duration-standard: 0.3s;
+  --size-project-link: 2.75rem;
+  --size-project-icon: 1.5rem;
+  --space-project-card: 1rem;
+  --size-project-cover: clamp(6rem, 20vh, 12.5rem);
   --admin-space: 1rem;
   --admin-space-lg: 2rem;
   --color-admin-border: #3a4154;
@@ -453,8 +457,30 @@ html.page-horizontal.lenis body {
 
 .project-card-links {
   display: flex;
+  align-items: center;
   flex-wrap: wrap;
   gap: 1rem;
+}
+
+.project-card-links .project-repo-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--size-project-link);
+  height: var(--size-project-link);
+  border-radius: var(--radius-control);
+  color: var(--color-accent-light);
+  text-decoration: none;
+  transition: color var(--duration-standard) ease;
+}
+
+.project-card-links .project-repo-link:hover {
+  color: var(--color-text);
+}
+
+.project-repo-link svg {
+  width: var(--size-project-icon);
+  height: var(--size-project-icon);
 }
 
 .project-card-links a,
@@ -1060,6 +1086,108 @@ section {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  height: 100%;
+  min-height: 0;
+  box-sizing: border-box;
+}
+
+.page-horizontal #projects-section-container > .section-header,
+.page-horizontal #projects-section-container > :last-child {
+  flex-shrink: 0;
+}
+
+.page-horizontal #projects .section-header {
+  margin-bottom: 0;
+}
+
+.page-horizontal #projects #view-all-link {
+  margin-top: 0;
+}
+
+.page-horizontal #projects .projects-carousel {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+}
+
+.page-horizontal #projects .projects-carousel-viewport {
+  flex: 1;
+  min-height: 0;
+  padding-top: var(--space-project-card);
+}
+
+.page-horizontal #projects .projects-carousel-container,
+.page-horizontal #projects .projects-carousel-slide {
+  height: 100%;
+  min-height: 0;
+}
+
+.page-horizontal #projects #projects-grid {
+  flex: 1;
+  min-height: 0;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-rows: minmax(0, 1fr);
+  margin-top: 0;
+}
+
+.page-horizontal #projects .project-card {
+  display: flex;
+  flex-direction: column;
+  aspect-ratio: auto;
+  height: 100%;
+  min-height: 0;
+  box-sizing: border-box;
+}
+
+.page-horizontal #projects .project-card-image {
+  height: var(--size-project-cover);
+  flex-shrink: 0;
+}
+
+.page-horizontal #projects .project-card-content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  padding: var(--space-project-card);
+  gap: var(--space-project-card);
+}
+
+.page-horizontal #projects .project-card-details {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-accent-light) var(--color-surface);
+}
+
+.project-card-details {
+  overflow-wrap: anywhere;
+}
+
+.project-card-details:focus-visible {
+  outline: 2px solid var(--color-accent-light);
+  outline-offset: -2px;
+}
+
+.projects-page-grid .project-card {
+  aspect-ratio: auto;
+}
+
+.project-tech-tags li {
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.page-horizontal #projects .project-card-links,
+.page-horizontal #projects .projects-carousel-controls {
+  flex-shrink: 0;
+}
+
+.project-card::before {
+  pointer-events: none;
 }
 
 .page-horizontal .photo-strip-section {

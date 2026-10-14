@@ -50,8 +50,8 @@ export async function saveProject(
   }
   if (values.coverImageUrl) {
     const url = new URL(values.coverImageUrl);
-    if (url.protocol !== "https:" || !(url.hostname === "avatars.githubusercontent.com" || url.hostname.endsWith(".public.blob.vercel-storage.com"))) {
-      return { error: "Cover images must use an HTTPS GitHub avatar or Vercel Blob URL supported by this site's image configuration." };
+    if (url.protocol !== "https:" || url.username || url.password) {
+      return { error: "Cover images must use a public HTTPS image URL without embedded credentials." };
     }
   }
   try {
