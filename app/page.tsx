@@ -4,6 +4,8 @@ import Link from "next/link";
 import { motion, type Variants } from "framer-motion";
 import { FaArrowRight, FaEnvelope, FaGithub, FaLinkedin } from "react-icons/fa";
 
+const CONTACT_EMAIL = "your.email@example.com";
+
 const fadeInUp: Variants = {
   hidden: { opacity: 0, y: 40 },
   visible: {
@@ -80,7 +82,7 @@ export default function Home() {
               I&apos;m too{" "}
               <AnimatedTechContinuous text="caffeinated" /> to sit still, so I
               build things instead. Clean code, sharp interfaces, and{" "}
-              <AnimatedTechContinuous text="zero chill" baseDelay={0.5} />.
+              <AnimatedTechContinuous text="zero chill" baseDelay={0.6} />.
             </motion.p>
             <motion.div variants={fadeInUp}>
               <Link href="/#contact" id="cta-button">
@@ -108,7 +110,7 @@ export default function Home() {
                 <FaLinkedin />
                 <span>LinkedIn</span>
               </a>
-              <a href="mailto:your.email@example.com" className="social-link" aria-label="Email">
+              <a href={`mailto:${CONTACT_EMAIL}`} className="social-link" aria-label="Email">
                 <FaEnvelope />
                 <span>Email</span>
               </a>
@@ -205,7 +207,7 @@ export default function Home() {
           >
             <motion.h2 className="section-title" variants={fadeInUp}>Get in Touch</motion.h2>
             <motion.p variants={fadeInUp}>Have a project in mind? I&apos;d love to hear from you.</motion.p>
-            <motion.a href="mailto:your.email@example.com" className="contact-button" variants={fadeInUp}>
+            <motion.a href={`mailto:${CONTACT_EMAIL}`} className="contact-button" variants={fadeInUp}>
               Email Me
             </motion.a>
           </motion.div>
