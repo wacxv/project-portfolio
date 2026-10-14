@@ -41,7 +41,6 @@ function PhotoSet({ duplicate = false }: { duplicate?: boolean }) {
 export default function PhotoStrip() {
   const sectionRef = useRef<HTMLElement>(null);
   const [isInView, setIsInView] = useState(false);
-  const [isPaused, setIsPaused] = useState(false);
 
   useEffect(() => {
     const section = sectionRef.current;
@@ -61,7 +60,7 @@ export default function PhotoStrip() {
   return (
     <section
       id="gallery"
-      className={`photo-strip-section${isInView ? " is-in-view" : ""}${isPaused ? " is-paused" : ""}`}
+      className={`photo-strip-section${isInView ? " is-in-view" : ""}`}
       ref={sectionRef}
       aria-labelledby="gallery-heading"
     >
@@ -79,22 +78,13 @@ export default function PhotoStrip() {
           {STRIP_HEADING.after}
         </h2>
         <p>{STRIP_DESCRIPTION}</p>
-        <button
-          type="button"
-          className="photo-strip-toggle"
-          aria-controls="gallery-photos"
-          aria-pressed={isPaused}
-          onClick={() => setIsPaused((paused) => !paused)}
-        >
-          {isPaused ? "Resume photos" : "Pause photos"}
-        </button>
       </motion.div>
       <div
         className="photo-strip-viewport"
         id="gallery-photos"
         tabIndex={0}
         role="region"
-        aria-label="Photos from my walks. Motion pauses on hover or keyboard focus."
+        aria-label="Photos from my walks. Motion pauses on keyboard focus."
         data-lenis-prevent
       >
         <div className="photo-strip-track">

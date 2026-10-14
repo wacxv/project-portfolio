@@ -251,6 +251,24 @@ body {
   touch-action: pan-y;
 }
 
+.projects-carousel-viewport,
+.photo-strip-viewport {
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent,
+    black 8%,
+    black 92%,
+    transparent
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    black 8%,
+    black 92%,
+    transparent
+  );
+}
+
 .projects-carousel-container {
   display: flex;
   width: max-content;
@@ -607,20 +625,6 @@ html.page-horizontal.lenis body {
   min-width: 0;
   padding-block: var(--space-gallery);
   overflow: hidden;
-  -webkit-mask-image: linear-gradient(
-    to right,
-    transparent,
-    black 8%,
-    black 92%,
-    transparent
-  );
-  mask-image: linear-gradient(
-    to right,
-    transparent,
-    black 8%,
-    black 92%,
-    transparent
-  );
   outline: none;
 }
 
@@ -638,7 +642,6 @@ html.page-horizontal.lenis body {
 
 .photo-strip-section:not(.is-in-view) .photo-strip-track,
 .photo-strip-section.is-paused .photo-strip-track,
-.photo-strip-viewport:hover .photo-strip-track,
 .photo-strip-viewport:focus-within .photo-strip-track {
   animation-play-state: paused;
 }
@@ -666,11 +669,6 @@ html.page-horizontal.lenis body {
 
 .photo-strip-card-lowered {
   transform: translateY(var(--space-gallery-stagger));
-}
-
-.photo-strip-card:hover {
-  border-color: #dc2626;
-  transform: translateY(-4px);
 }
 
 .photo-strip-card img {
