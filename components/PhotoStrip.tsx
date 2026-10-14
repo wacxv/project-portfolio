@@ -9,8 +9,8 @@ import { GALLERY_PHOTOS } from "@/data/gallery";
 
 const STRIP_LABEL = "OFF THE KEYBOARD";
 const STRIP_HEADING = {
-  before: "I ",
-  highlight: "walk",
+  before: "I touch ",
+  highlight: "grass",
   after: " too.",
 };
 const STRIP_DESCRIPTION =

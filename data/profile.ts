@@ -23,7 +23,7 @@ export const ABOUT_TEXT = [
   "I like coffee (maybe too much), long walks, and making thoughtful interfaces that turn complex ideas into useful tools.",
 ];
 
-export const CURRENTLY_LEARNING = "Currently building: StickUp! A desktop productivity app built with Tauri, React, and TypeScript. It helps users stay focused by allowing them to create sticky notes that stay on top of other windows.";
+export const CURRENTLY_LEARNING = "Currently building/maintaining: StickUp! A desktop productivity app built with Tauri, React, and TypeScript. It helps users stay focused by allowing them to create sticky notes that stay on top of other windows.";
 
 export const SKILL_CATEGORIES: SkillCategory[] = [
   {

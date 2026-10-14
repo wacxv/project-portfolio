@@ -2,7 +2,7 @@
 
 import { ReactLenis } from "lenis/react";
 import { usePathname } from "next/navigation";
-import { useEffect, useState, type ReactNode } from "react";
+import { useEffect, useLayoutEffect, useState, type ReactNode } from "react";
 
 export default function SmoothScroll({ children }: { children: ReactNode }) {
   const pathname = usePathname();
@@ -20,7 +20,7 @@ export default function SmoothScroll({ children }: { children: ReactNode }) {
     return () => mediaQuery.removeEventListener("change", updatePreference);
   }, []);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (isHorizontalPage) {
       document.documentElement.classList.add("page-horizontal");
       document.body.classList.add("page-horizontal");
@@ -28,7 +28,23 @@ export default function SmoothScroll({ children }: { children: ReactNode }) {
       document.documentElement.classList.remove("page-horizontal");
       document.body.classList.remove("page-horizontal");
     }
+
+    // Hash navigation can scroll an overflow-hidden document vertically.
+    // Keep the horizontal page below its fixed header, including after a
+    // return from a vertically scrolling route such as /projects.
+    const resetVerticalScroll = () => {
+      if (window.scrollY !== 0) {
+        window.scrollTo({ left: window.scrollX, top: 0, behavior: "instant" });
+      }
+    };
+
+    if (isHorizontalPage) {
+      resetVerticalScroll();
+      window.addEventListener("scroll", resetVerticalScroll, { passive: true });
+    }
+
     return () => {
+      window.removeEventListener("scroll", resetVerticalScroll);
       document.documentElement.classList.remove("page-horizontal");
       document.body.classList.remove("page-horizontal");
     };
