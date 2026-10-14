@@ -266,10 +266,7 @@ export default function HomeClient({
                 <span>Email</span>
               </a>
             </motion.div>
-            <motion.div className="horizontal-scroll-hint" variants={fadeInUp} aria-hidden="true">
-              <span>Scroll horizontally</span>
-              <span className="scroll-hint-arrow">&rarr;</span>
-            </motion.div>
+            
             </motion.div>
           </motion.div>
         </section>

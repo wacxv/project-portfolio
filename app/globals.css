@@ -203,11 +203,11 @@ body {
 .scroll-progress {
   position: fixed;
   z-index: 1100;
-  top: 0;
+  bottom: 0;
   right: 0;
   left: 0;
   height: 3px;
-  background: #dc2626;
+  background: var(--color-accent);
   transform: scaleX(0);
   transform-origin: left;
   pointer-events: none;
@@ -331,6 +331,11 @@ html.page-horizontal {
   overflow-x: auto;
   overflow-y: hidden;
   overscroll-behavior-x: none;
+  scrollbar-width: none;
+}
+
+html.page-horizontal::-webkit-scrollbar {
+  display: none;
 }
 
 html.page-horizontal.lenis {
@@ -1062,23 +1067,6 @@ section {
   padding: 2rem;
   box-sizing: border-box;
   text-align: center;
-}
-
-.horizontal-scroll-hint {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.6rem;
-  color: var(--color-muted);
-  font-size: 0.85rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  margin-top: 1rem;
-  padding: 0.45rem 0.9rem;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 999px;
-  width: fit-content;
 }
 
 .scroll-hint-arrow {

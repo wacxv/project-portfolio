@@ -94,17 +94,5 @@ export const TIMELINE_ENTRIES: TimelineEntry[] = [
     place: "iCXeed Inc., Philippines",
     dates: "January 2025 – May 2025",
     description: "Built an Angular and TypeScript AWS pricing calculator, contributed MariaDB pricing logic and CRUD operations, and deployed the application with CloudFront, S3, and Cognito.",
-  },
-  {
-    title: "Bachelor of Science in Information Technology, Cum Laude",
-    place: "Mapúa University",
-    dates: "2022 – February 2026",
-    description: "Graduated with a focus on building practical software systems across web, desktop, and connected-device projects.",
-  },
-  {
-    title: "HavenBloom Telehealth Platform",
-    place: "Undergraduate Thesis",
-    dates: "2025",
-    description: "Built most of the features in a three-person team, including real-time chat, WebRTC consultations, live BLE and MQTT health data, dashboards, and appointment workflows.",
   }
 ];
