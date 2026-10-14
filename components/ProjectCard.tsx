@@ -39,7 +39,6 @@ export default function ProjectCard({
       <div className="project-card-content">
         <div
           className="project-card-details"
-          data-lenis-prevent
           tabIndex={duplicate ? -1 : 0}
           role="region"
           aria-label={`${project.title} details and technologies`}

@@ -284,9 +284,7 @@ body {
   height: 100%;
 }
 
-.projects-carousel:not(.is-in-view) .projects-carousel-container,
-.projects-carousel:hover .projects-carousel-container,
-.projects-carousel:focus-within .projects-carousel-container {
+.projects-carousel:not(.is-in-view) .projects-carousel-container {
   animation-play-state: paused;
 }
 
@@ -1242,7 +1240,6 @@ section {
   flex: 1;
   min-height: 0;
   overflow-y: auto;
-  overscroll-behavior: contain;
   scrollbar-width: thin;
   scrollbar-color: var(--color-accent-light) var(--color-surface);
 }
