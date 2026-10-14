@@ -40,8 +40,8 @@ export default function ProjectGrid({ projects }: { projects: Project[] }) {
           animate="visible"
           variants={staggerContainer}
         >
-          {filteredProjects.map((project) => (
-            <ProjectCard key={project.id} project={project} />
+          {filteredProjects.map((project, index) => (
+            <ProjectCard key={project.id} project={project} eagerCover={index === 0} />
           ))}
         </motion.div>
       ) : (

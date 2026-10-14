@@ -13,6 +13,13 @@
   --size-project-icon: 1.5rem;
   --space-project-card: 1rem;
   --size-project-cover: clamp(6rem, 20vh, 12.5rem);
+  --duration-project-loop: 55s;
+  --gap-project-loop: 1.25rem;
+  --size-project-slide: clamp(17.5rem, 26vw, 24rem);
+  --font-project-description: 0.875rem;
+  --font-project-tag: 0.75rem;
+  --space-project-tag-y: 0.25rem;
+  --space-project-tag-x: 0.5rem;
   --admin-space: 1rem;
   --admin-space-lg: 2rem;
   --color-admin-border: #3a4154;
@@ -241,13 +248,63 @@ body {
 
 .projects-carousel-container {
   display: flex;
-  gap: 1.25rem;
+  width: max-content;
+  animation: projects-carousel-drift var(--duration-project-loop) linear infinite;
   backface-visibility: hidden;
+}
+
+.projects-carousel-set {
+  display: flex;
+  flex-shrink: 0;
+  gap: var(--gap-project-loop);
+  padding-right: var(--gap-project-loop);
+  height: 100%;
+}
+
+.projects-carousel:not(.is-in-view) .projects-carousel-container,
+.projects-carousel:hover .projects-carousel-container,
+.projects-carousel:focus-within .projects-carousel-container {
+  animation-play-state: paused;
+}
+
+.projects-carousel.is-single .projects-carousel-container {
+  animation: none;
+}
+
+.projects-carousel.is-single .projects-carousel-set[aria-hidden="true"] {
+  display: none;
+}
+
+@keyframes projects-carousel-drift {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.projects-carousel-viewport:focus-visible {
+  outline: 2px solid var(--color-accent-light);
+  outline-offset: -2px;
+}
+
+.projects-carousel .project-card p {
+  font-size: var(--font-project-description);
+  line-height: 1.5;
+}
+
+.projects-carousel .project-tech-tags li {
+  font-size: var(--font-project-tag);
+  padding: var(--space-project-tag-y) var(--space-project-tag-x);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .projects-carousel-container { animation: none; }
+  .projects-carousel-viewport { overflow-x: auto; }
+  .projects-carousel-set[aria-hidden="true"] { display: none; }
 }
 
 .projects-carousel-slide {
   min-width: 0;
-  flex: 0 0 40%;
+  width: var(--size-project-slide);
+  flex: 0 0 var(--size-project-slide);
 }
 
 .projects-carousel .project-card {
@@ -321,7 +378,8 @@ body {
 
 @media (max-width: 700px) {
   .projects-carousel-slide {
-    flex-basis: 85%;
+    width: var(--size-project-slide);
+    flex-basis: var(--size-project-slide);
   }
 }
 

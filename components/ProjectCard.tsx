@@ -2,46 +2,32 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
+import { motion } from "framer-motion";
 import { FaGithub } from "react-icons/fa";
 
 import { fadeInUp } from "@/components/animation-variants";
 import type { Project } from "@/db/schema";
 
-export default function ProjectCard({ project }: { project: Project }) {
-  const cardRef = useRef<HTMLElement>(null);
-  const [isMounted, setIsMounted] = useState(false);
-  const prefersReducedMotion = useReducedMotion();
-  const { scrollXProgress } = useScroll({
-    target: cardRef,
-    axis: "x",
-    offset: ["start 0.95", "center 0.5"],
-  });
-  const cardOpacity = useTransform(scrollXProgress, [0, 1], [0, 1]);
-  const cardScale = useTransform(scrollXProgress, [0, 1], [0.95, 1]);
-
-  useEffect(() => {
-    const frame = requestAnimationFrame(() => setIsMounted(true));
-    return () => cancelAnimationFrame(frame);
-  }, []);
-
+export default function ProjectCard({
+  project,
+  eagerCover = false,
+  duplicate = false,
+}: {
+  project: Project;
+  eagerCover?: boolean;
+  duplicate?: boolean;
+}) {
   return (
     <motion.article
-      ref={cardRef}
       className="project-card"
       variants={fadeInUp}
-      style={
-        !isMounted || prefersReducedMotion
-          ? undefined
-          : { opacity: cardOpacity, scale: cardScale }
-      }
     >
       {project.coverImageUrl ? (
         <Image
           className="project-card-image"
           src={project.coverImageUrl}
           unoptimized
+          loading={eagerCover ? "eager" : "lazy"}
           alt={`${project.title} cover`}
           width={800}
           height={500}
@@ -54,7 +40,7 @@ export default function ProjectCard({ project }: { project: Project }) {
         <div
           className="project-card-details"
           data-lenis-prevent
-          tabIndex={0}
+          tabIndex={duplicate ? -1 : 0}
           role="region"
           aria-label={`${project.title} details and technologies`}
         >
@@ -77,12 +63,13 @@ export default function ProjectCard({ project }: { project: Project }) {
               rel="noopener noreferrer"
               aria-label={`View ${project.title} repository on GitHub (opens in a new tab)`}
               title="View repository on GitHub"
+              tabIndex={duplicate ? -1 : undefined}
             >
               <FaGithub aria-hidden="true" />
             </Link>
           ) : null}
           {project.liveUrl ? (
-            <Link href={project.liveUrl} target="_blank" rel="noopener noreferrer">
+            <Link href={project.liveUrl} target="_blank" rel="noopener noreferrer" tabIndex={duplicate ? -1 : undefined}>
               Live demo
             </Link>
           ) : null}
