@@ -19,7 +19,7 @@ export interface TimelineEntry {
 }
 
 export const ABOUT_TEXT = [
-  "I am Joaquin Carlos Vizconde, a full-stack developer from Pasig City, Philippines, who enjoys building and deploying web applications.",
+  "I am Joaquin Vizconde, a full-stack developer from Pasig City, Philippines, who enjoys building and deploying web applications.",
   "I like coffee (maybe too much), long walks, and making thoughtful interfaces that turn complex ideas into useful tools.",
 ];
 
