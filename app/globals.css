@@ -1,5 +1,16 @@
 @import "tailwindcss";
 
+:root {
+  --color-background: #0a0c14;
+  --color-surface: #121725;
+  --color-accent: #dc2626;
+  --color-accent-light: #f87171;
+  --color-text: #ffffff;
+  --color-muted: #9ca3af;
+  --radius-control: 6px;
+  --duration-standard: 0.3s;
+}
+
 html,
 body {
   margin: 0;
@@ -7,6 +18,186 @@ body {
   background: #0a0e14;
   color: #ededed;
   font-family: Arial, Helvetica, sans-serif;
+}
+
+.contact-content {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(12rem, 1fr);
+  gap: 3rem;
+  margin-top: 2rem;
+}
+
+.contact-form {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.form-field {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.form-field label,
+.contact-details h3 {
+  color: var(--color-text);
+  font-weight: 600;
+}
+
+.form-field input,
+.form-field textarea {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0.85rem 1rem;
+  border: 1px solid #3a4154;
+  border-radius: var(--radius-control);
+  background: var(--color-surface);
+  color: var(--color-text);
+  font: inherit;
+  transition: border-color var(--duration-standard) ease, box-shadow var(--duration-standard) ease;
+}
+
+.form-field textarea {
+  resize: vertical;
+}
+
+.form-field input:focus-visible,
+.form-field textarea:focus-visible {
+  border-color: var(--color-accent-light);
+  outline: 2px solid var(--color-accent-light);
+  outline-offset: 2px;
+}
+
+.form-field input[aria-invalid="true"],
+.form-field textarea[aria-invalid="true"] {
+  border-color: var(--color-accent-light);
+}
+
+.field-error {
+  margin: 0;
+  color: var(--color-accent-light) !important;
+  font-size: 0.9rem;
+}
+
+.honeypot-field {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.contact-submit,
+.contact-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  align-self: flex-start;
+  padding: 0.85rem 1.5rem;
+  border: 2px solid var(--color-accent);
+  border-radius: var(--radius-control);
+  background: var(--color-accent);
+  color: var(--color-text);
+  font: inherit;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background var(--duration-standard) ease, border-color var(--duration-standard) ease, transform var(--duration-standard) ease;
+}
+
+.contact-submit {
+  cursor: pointer;
+}
+
+.contact-submit:hover:not(:disabled),
+.contact-button:hover {
+  background: #991b1b;
+  border-color: #991b1b;
+}
+
+.contact-submit:focus-visible,
+.contact-button:focus-visible,
+.back-to-top:focus-visible {
+  outline: 2px solid var(--color-accent-light);
+  outline-offset: 4px;
+}
+
+.contact-submit:disabled {
+  cursor: wait;
+  opacity: 0.7;
+}
+
+.button-spinner {
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  border-top-color: var(--color-text);
+  border-radius: 50%;
+  animation: contact-spinner 0.8s linear infinite;
+}
+
+.form-status {
+  min-height: 1.5rem;
+  margin: 0;
+}
+
+.form-status-success {
+  color: #86efac !important;
+}
+
+.form-status-error {
+  color: var(--color-accent-light) !important;
+}
+
+.contact-details {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.contact-details h3 {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.contact-socials,
+.footer-socials {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+}
+
+.site-footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 3rem 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  color: var(--color-muted);
+  text-align: center;
+}
+
+.site-footer p {
+  margin: 0;
+}
+
+.back-to-top {
+  color: var(--color-accent-light);
+  text-decoration: none;
+}
+
+@keyframes contact-spinner {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .button-spinner {
+    animation: none;
+  }
 }
 
 .scroll-progress {
@@ -1134,6 +1325,11 @@ section {
 }
 
 @media (max-width: 768px) {
+  .contact-content {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
   #header-container {
     flex-direction: row;
   }

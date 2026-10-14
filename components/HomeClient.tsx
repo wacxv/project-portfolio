@@ -37,6 +37,7 @@ import { fadeInUp, staggerContainer } from "@/components/animation-variants";
 import PhotoStrip from "@/components/PhotoStrip";
 import ProjectsCarousel from "@/components/ProjectsCarousel";
 import ScrollReveal from "@/components/ScrollReveal";
+import ContactForm from "@/components/ContactForm";
 import {
   ABOUT_TEXT,
   CURRENTLY_LEARNING,
@@ -156,6 +157,7 @@ export default function HomeClient({
 }) {
   const heroRef = useRef<HTMLElement>(null);
   const [isMounted, setIsMounted] = useState(false);
+  const [currentYear, setCurrentYear] = useState<number | null>(null);
   const prefersReducedMotion = useReducedMotion();
   const { scrollYProgress: heroProgress } = useScroll({
     target: heroRef,
@@ -166,7 +168,10 @@ export default function HomeClient({
   const heroScale = useTransform(heroProgress, [0, 1], [1, 0.92]);
 
   useEffect(() => {
-    const frame = requestAnimationFrame(() => setIsMounted(true));
+    const frame = requestAnimationFrame(() => {
+      setIsMounted(true);
+      setCurrentYear(new Date().getFullYear());
+    });
     return () => cancelAnimationFrame(frame);
   }, []);
 
@@ -363,13 +368,42 @@ export default function HomeClient({
           >
             <motion.h2 className="section-title" variants={fadeInUp}>Get in Touch</motion.h2>
             <motion.p variants={fadeInUp}>Have a project in mind? I&apos;d love to hear from you.</motion.p>
-            <motion.a href={`mailto:${CONTACT_EMAIL}`} className="contact-button" variants={fadeInUp}>
-              Email Me
-            </motion.a>
+            <div className="contact-content">
+              <motion.div className="contact-form-wrapper" variants={fadeInUp}>
+                <ContactForm />
+              </motion.div>
+              <motion.aside className="contact-details" variants={fadeInUp}>
+                <h3>Prefer email?</h3>
+                <a href={`mailto:${CONTACT_EMAIL}`} className="contact-button">
+                  <FaEnvelope aria-hidden="true" />
+                  Email Me
+                </a>
+                <div className="contact-socials">
+                  <a href="https://github.com/wacxv" className="social-link" target="_blank" rel="noopener noreferrer">
+                    <FaGithub aria-hidden="true" />
+                    <span>GitHub</span>
+                  </a>
+                  <a href="https://www.linkedin.com/in/joaquin-carlos-vizconde" className="social-link" target="_blank" rel="noopener noreferrer">
+                    <FaLinkedin aria-hidden="true" />
+                    <span>LinkedIn</span>
+                  </a>
+                </div>
+              </motion.aside>
+            </div>
           </motion.div>
         </section>
       </div>
       </div>
+      <footer className="site-footer">
+        <div className="footer-socials">
+          <a href="https://github.com/wacxv" className="social-link" target="_blank" rel="noopener noreferrer">GitHub</a>
+          <a href="https://www.linkedin.com/in/joaquin-carlos-vizconde" className="social-link" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          <a href={`mailto:${CONTACT_EMAIL}`} className="social-link">Email</a>
+        </div>
+        <p>&copy; {currentYear ?? ""} Joaquin Vizconde. All rights reserved.</p>
+        <p>Built with Next.js</p>
+        <a className="back-to-top" href="#home">Back to top <span aria-hidden="true">↑</span></a>
+      </footer>
     </>
   );
 }
