@@ -41,12 +41,16 @@ export default function Header({ profile }: { profile: GitHubProfile }) {
 
     const observer = new IntersectionObserver(
       (entries) => {
-        const visibleSection = entries.find((entry) => entry.isIntersecting);
-        if (visibleSection) {
-          setActiveSection(visibleSection.target.id);
+        const intersecting = entries.filter((entry) => entry.isIntersecting);
+        if (intersecting.length > 0) {
+          intersecting.sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+          setActiveSection(intersecting[0].target.id);
         }
       },
-      { rootMargin: "-45% 0px -50% 0px" },
+      {
+        rootMargin: "0px -25% 0px -25%",
+        threshold: [0.1, 0.3, 0.5, 0.8],
+      },
     );
 
     sections.forEach((section) => observer.observe(section));
@@ -123,9 +127,21 @@ export default function Header({ profile }: { profile: GitHubProfile }) {
         className={`nav-link${mobile ? " mobile-nav-link" : ""}`}
         aria-current={pathname === "/" && activeSection === item.href.slice(2) ? "page" : undefined}
         key={item.href}
-        onClick={() => {
+        onClick={(event) => {
           if (mobile) {
             setIsMenuOpen(false);
+          }
+          if (pathname === "/") {
+            const targetId = item.href.slice(2);
+            const targetEl = document.getElementById(targetId);
+            if (targetEl) {
+              if (lenis) {
+                event.preventDefault();
+                lenis.scrollTo(targetEl, { offset: 0 });
+                window.history.pushState(null, "", item.href);
+                setActiveSection(targetId);
+              }
+            }
           }
         }}
       >

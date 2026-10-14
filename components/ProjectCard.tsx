@@ -12,12 +12,13 @@ export default function ProjectCard({ project }: { project: Project }) {
   const cardRef = useRef<HTMLElement>(null);
   const [isMounted, setIsMounted] = useState(false);
   const prefersReducedMotion = useReducedMotion();
-  const { scrollYProgress } = useScroll({
+  const { scrollXProgress } = useScroll({
     target: cardRef,
-    offset: ["start 0.85", "center 0.5"],
+    axis: "x",
+    offset: ["start 0.95", "center 0.5"],
   });
-  const cardOpacity = useTransform(scrollYProgress, [0, 1], [0, 1]);
-  const cardScale = useTransform(scrollYProgress, [0, 1], [0.95, 1]);
+  const cardOpacity = useTransform(scrollXProgress, [0, 1], [0, 1]);
+  const cardScale = useTransform(scrollXProgress, [0, 1], [0.95, 1]);
 
   useEffect(() => {
     const frame = requestAnimationFrame(() => setIsMounted(true));

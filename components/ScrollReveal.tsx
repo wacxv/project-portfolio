@@ -34,9 +34,10 @@ export default function ScrollReveal({ text }: { text: string }) {
   const paragraphRef = useRef<HTMLParagraphElement>(null);
   const [isMounted, setIsMounted] = useState(false);
   const prefersReducedMotion = useReducedMotion();
-  const { scrollYProgress } = useScroll({
+  const { scrollXProgress } = useScroll({
     target: paragraphRef,
-    offset: ["start 0.8", "end 0.4"],
+    axis: "x",
+    offset: ["start 0.9", "end 0.35"],
   });
 
   useEffect(() => {
@@ -50,7 +51,7 @@ export default function ScrollReveal({ text }: { text: string }) {
         <RevealWord
           key={`${word}-${index}`}
           word={word}
-          progress={scrollYProgress}
+          progress={scrollXProgress}
           disabled={!isMounted || prefersReducedMotion !== false}
         />
       ))}
