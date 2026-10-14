@@ -45,6 +45,117 @@ html.lenis body {
   color: #9ca3af;
 }
 
+.admin-shell {
+  min-height: 100vh;
+  background: #0a0e14;
+  color: #ededed;
+}
+
+.admin-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 2rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.admin-header nav {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.admin-header a,
+.admin-link-button {
+  color: #f87171;
+  background: transparent;
+  border: 0;
+  font: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.admin-header a:hover,
+.admin-link-button:hover {
+  color: #dc2626;
+}
+
+.admin-header a:focus-visible,
+.admin-link-button:focus-visible,
+.admin-button:focus-visible,
+.admin-card input:focus-visible {
+  outline: 2px solid #f87171;
+  outline-offset: 3px;
+}
+
+.admin-login {
+  display: grid;
+  min-height: 100vh;
+  place-items: center;
+  padding: 2rem;
+  background: #0a0e14;
+}
+
+.admin-card {
+  display: grid;
+  width: min(100%, 28rem);
+  gap: 0.75rem;
+  padding: 2rem;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 8px;
+  background: #111722;
+}
+
+.admin-card h1,
+.admin-dashboard h1 {
+  margin: 0;
+  color: #ffffff;
+}
+
+.admin-card p,
+.admin-dashboard p {
+  color: #9ca3af;
+}
+
+.admin-card input {
+  margin-bottom: 0.5rem;
+  padding: 0.75rem;
+  border: 1px solid #4b5563;
+  border-radius: 4px;
+  background: #0a0e14;
+  color: #ffffff;
+}
+
+.admin-button {
+  margin-top: 0.5rem;
+  padding: 0.75rem 1rem;
+  border: 0;
+  border-radius: 4px;
+  background: #dc2626;
+  color: #ffffff;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.admin-button:hover {
+  background: #b91c1c;
+}
+
+.admin-button:disabled {
+  cursor: wait;
+  opacity: 0.7;
+}
+
+.admin-error {
+  color: #f87171 !important;
+}
+
+.admin-dashboard {
+  max-width: 60rem;
+  margin: 0 auto;
+  padding: 4rem 2rem;
+}
+
 #header-outer {
   display: flex;
   justify-content: center;
