@@ -126,6 +126,12 @@ export const SKILL_CATEGORIES: SkillCategory[] = [
 
 export const TIMELINE_ENTRIES: TimelineEntry[] = [
   {
+    title: "Quality Engineer: Fullstack",
+    place: "IBM Consulting, Philippines",
+    dates: "November 2026 – Present",
+    description: "",
+  },
+  {
     title: "Cloud Developer Intern",
     place: "iCXeed Inc., Philippines",
     dates: "January 2025 – May 2025",
